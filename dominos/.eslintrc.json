@@ -1,4 +1,4 @@
-module.exports = {
+{
     "env": {
         "browser": true,
         "es2021": true
@@ -13,23 +13,12 @@ module.exports = {
         "plugin:import/warnings",
         "plugin:import/typescript"
     ],
-    "settings": {
-        "import/parsers": {
-          "@typescript-eslint/parser": [".ts", ".tsx"]
-        },
-        "import/resolver": {
-          "typescript": {
-            "project": __dirname
-          }
-        }
-    },
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
-      "ecmaFeatures": {
-        "jsx": true,
-      },
-      "ecmaVersion": 12,
+      "ecmaVersion": 2018,
       "sourceType": "module",
+      "project": "tsconfig.json"
+    //   "tsconfigRootDir": __dirname
     },
     "plugins": [
         "react",
