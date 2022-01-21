@@ -8,7 +8,7 @@ const { AUTHORIZATION_ERROR } = require('../../errors/appErrors');
 const ALLOWED_PATHS = ['/signin', '/signup'];
 const DOC_PATH_REGEX = /^\/doc\/?$/;
 const DOC_PATH_RESOURCES_REGEX = /^\/doc\/.+$/;
-const WORDS_PATH_REGEX = /^\/words.*$/;
+const WORDS_PATH_REGEX = /^\/words.*$|^\/pizzas.*$/;
 const USERS_PATH = '/users';
 
 function isOpenPath(path) {

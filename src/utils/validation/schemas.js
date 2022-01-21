@@ -29,6 +29,7 @@ const optionalScheme = Joi.object()
 const schemas = {
   id: Joi.object({ id: Joi.objectId() }),
   wordId: Joi.object({ id: Joi.objectId(), wordId: Joi.objectId() }),
+  pizzaId: Joi.object({ id: Joi.objectId(), pizzaId: Joi.objectId() }),
   user: Joi.object()
     .options({ abortEarly: false, allowUnknown: true })
     .keys({

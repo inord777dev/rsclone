@@ -1,7 +1,7 @@
 openapi: 3.0.0
 info:
-  title: React Learn Words
-  description: a backend part of RSSchool-React "Learn words" task
+  title: RS Clone Dominos 
+  description: a backend part of RSSchool-React "RS Clone" task
   version: 1.0.0
 
 servers:
@@ -40,6 +40,29 @@ components:
           type: string
         textExampleTranslate:
           type: string
+    Pizza:
+      type: object
+      properties:
+        id:
+          type: string
+        group:
+          type: number
+        page:
+          type: number
+        key:
+          type: string
+        name:
+          type: string
+        composition:
+          type: string
+        image:
+          type: string
+        price:
+          type: string
+        weith:
+          type: string
+        isHit:
+          type: boolean
     UserWord:
       type: object
       properties:
@@ -156,6 +179,58 @@ paths:
             application/json:
               schema:
                   $ref: "#/components/schemas/Word"
+  /pizzas:
+    parameters:
+      - name: group
+        in: query
+        required: false
+        description: group number
+        schema:
+          type: string
+      - name: page
+        in: query
+        required: false
+        description: page in the group
+        schema:
+          type: string
+    get:
+      tags:
+        - Pizzas
+      security:
+        []
+      summary: Get a chunk of pizzas
+      description: Gets a chunk of pizzas
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Pizza"
+  /pizzas/{id}:
+    parameters:
+      - name: id
+        description: pizzaId
+        in: path
+        required: true
+        schema:
+          type: string
+    get:
+      tags:
+        - Pizzas
+      security:
+        []
+      summary: Get a pizza with assets by id
+      description: Gets a pizza with assets by id
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                  $ref: "#/components/schemas/Pizza"
   /users:
     post:
       tags:
