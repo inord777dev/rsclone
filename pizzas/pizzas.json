@@ -1,0 +1,5 @@
+[
+  {"_id":{"$oid":"61ea74fb1c78865de913192b"},"key":"0","name":"Изи Фризи","composition":"Сыр моцарелла, Картофель фри, Соус Ранч, Сосиски куриные, Ветчина","image":"izi_frizi_small.png","price":"28.89 руб.","weith":"705 гр","isHit":false},
+  {"_id":{"$oid":"61ea8f79363cc72043f121f2"},"key":"1","name":"Чеддерони","composition":"Крем фреш, Чеддер, Ветчина, Пепперони, Сыр моцарелла","image":"chedderoni_small.png","price":"28.89 руб.","weith":"670 гр","isHit":false},
+  {"_id":{"$oid":"61ea906f363cc72043f121f3"},"key":"2","name":"Говядина BURGER","composition":"Шампиньоны, Телятина, Сыр моцарелла, Соус Бургер, Лук, Огурцы","image":"govyadina_burger_small.png","price":"28.89 руб.","weith":"625 гр","isHit":false}
+]

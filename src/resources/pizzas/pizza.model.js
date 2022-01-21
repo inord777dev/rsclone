@@ -4,8 +4,6 @@ const { addMethods } = require('../../utils/toResponse');
 
 const PizzasSchema = new Schema(
   {
-    group: { type: Number, required: true },
-    page: { type: Number, required: true },
     key: String,
     name: String,
     composition: String,

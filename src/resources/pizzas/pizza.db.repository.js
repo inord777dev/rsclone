@@ -2,10 +2,8 @@ const Pizza = require('./pizza.model');
 const { NOT_FOUND_ERROR } = require('../../errors/appErrors');
 const ENTITY_NAME = 'pizza';
 
-const getAll = async conditions => {
-  const { group, page } = conditions;
-
-  return Pizza.find({ group, page });
+const getAll = async () => {
+  return Pizza.find({});
 };
 
 const get = async id => {
