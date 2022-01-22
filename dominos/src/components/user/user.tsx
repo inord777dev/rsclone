@@ -1,9 +1,9 @@
 import React from 'react';
+import style from './user.module.scss';
 import History from './history/history';
-import style from './profile.module.scss';
 import UserInfo from './userInfo/userInfo';
 
-export default function Profile() {
+export default function User() {
   return (
     <div className={style.content}>
       <UserInfo />
