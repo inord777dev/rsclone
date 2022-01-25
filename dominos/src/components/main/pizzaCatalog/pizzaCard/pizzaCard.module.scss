@@ -1,0 +1,110 @@
+.pizza_card_info_text {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.pizza_card {
+  width: 300px;
+  padding: 20px;
+  background-color: white;
+  border-radius: 1rem;
+}
+
+.pizza_card_info {
+  width: 100%;
+  gap: 2rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.pizza_card_info_name {
+  width: 100%;
+  font-size: 2rem;
+  text-align: center;
+}
+
+.pizza_card_add {
+  font-size: 1.5rem;
+  color: rgba($color: grey, $alpha: 0.5);
+  text-align: center;
+}
+
+.select_container {
+  width: 11.9rem;
+  height: 3.5rem;
+  border: 0.1rem solid rgba($color: grey, $alpha: 0.5);
+  border-radius: 9px;
+}
+
+.type_pizza_select {
+  display: flex;
+  gap: 3rem;
+}
+
+.add_with_pizza {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(0,121,174,.06);
+  padding: 0 1rem;
+  border-radius: 0.4rem;
+}
+
+.container_add_pizza {
+  background-color: rgba(0,121,174,.16);
+  border-radius: 5px;
+}
+
+.img_size {
+  height: 3.2rem;
+}
+
+.container_name_add {
+  font-size: 1.4rem;
+}
+
+.text_cash_add {
+  font-size: 1.2rem;
+}
+
+.add_type_pizza {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.buy_card {
+  display: flex;
+  justify-content: space-between;
+}
+
+.info_cash_and_gr {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  & span {
+    font-size: 1.4rem;
+  }
+
+  color: rgba($color: grey, $alpha: 0.5);
+
+  & .info_cash_color {
+    color: black;
+  }
+}
+
+.button_buy {
+  width: 10rem;
+  height: 3rem;
+  background-color: #e31837;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 3px;
+  font-size: 1.5rem;
+}
+
