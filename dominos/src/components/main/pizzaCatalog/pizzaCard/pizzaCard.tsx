@@ -1,20 +1,27 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import React from 'react';
 import style from './pizzaCard.module.scss';
-import pizzaImg from '../../../../assets/pizza/5_syrov.png';
-import pizzaType from '../../../../assets/front/addPizza.png';
+import cheeseBoard from '../../../../assets/front/cheeseBoard.png';
+import mozarella from '../../../../assets/front/mozarella.png';
+import { Pizza } from '../../../../common/types';
 
-export default function PizzaCard() {
+type PizzaCardProps = {
+  pizza: Pizza
+};
+
+export default function PizzaCard(props:PizzaCardProps) {
+  const { pizza } = props;
+
   return (
     <div className={style.pizza_card}>
-      <img src={pizzaImg} alt="no img" />
+      <img src={`${process.env.PUBLIC_URL || ''}/pizza/${pizza.image}`} alt={pizza.image} />
       <div className={style.pizza_card_info}>
         <div className={style.pizza_card_info_name}>
-          NAME
+          {pizza.name}
         </div>
         <div className={style.pizza_card_info_text}>
           <div className={style.pizza_card_add}>
-            Соус Ранч, Томаты, Сыр моцарелла, Курица
+            {pizza.ingredients}
           </div>
           <div className={style.type_pizza_select}>
             <select name="sizePizza" className={style.select_container}>
@@ -33,7 +40,7 @@ export default function PizzaCard() {
           <div className={style.add_with_pizza}>
             <div className={style.add_type_pizza}>
               <svg className={style.container_add_pizza} width="26" height="26" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="rgb(0,121,174)"><g><path d="M11 11V7H13V11H17V13H13V17H11V13H7V11H11Z" /></g></svg>
-              <img className={style.img_size} src={pizzaType} alt="no img" />
+              <img className={style.img_size} src={cheeseBoard} alt="no img" />
               <div className={style.container_name_add}>
                 Хот-Дог борт
               </div>
@@ -45,7 +52,7 @@ export default function PizzaCard() {
           <div className={style.add_with_pizza}>
             <div className={style.add_type_pizza}>
               <svg className={style.container_add_pizza} width="26" height="26" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="rgb(0,121,174)"><g><path d="M11 11V7H13V11H17V13H13V17H11V13H7V11H11Z" /></g></svg>
-              <img className={style.img_size} src={pizzaType} alt="no img" />
+              <img className={style.img_size} src={mozarella} alt="no img" />
               <div className={style.container_name_add}>
                 Моцарелла-mini
               </div>
@@ -56,8 +63,8 @@ export default function PizzaCard() {
           </div>
           <div className={style.buy_card}>
             <div className={style.info_cash_and_gr}>
-              <span className={style.info_cash_color}>20.99 руб.</span>
-              <span>640гр.</span>
+              <span className={style.info_cash_color}>{pizza.price}</span>
+              <span>{pizza.weith}</span>
             </div>
             <div className={style.button_buy}>
               В корзину
