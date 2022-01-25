@@ -1,5 +1,14 @@
-.content {
-  width: 100vw;
-  height: 100vh;
-  background-color: #f7fcff;
+.wrapper {
+  width: 100%;
+  background-image: url('../../assets/front/main2.png');
+}
+
+.navigation_container {
+  width: 100%;
+  background-color: white;
+}
+
+.navigation {
+  width: 1350px;
+  margin: 0 auto;
 }
