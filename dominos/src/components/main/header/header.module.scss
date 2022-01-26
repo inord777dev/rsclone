@@ -1,0 +1,97 @@
+
+.content_header_bg {
+  background-image: url('../../../assets/front/header.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.content_header {
+  width: 1350px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  padding: 2.8rem 0;
+  align-items: center;
+}
+
+.content_header_logo {
+  width: 15rem;
+}
+
+.content_header_logo_img {
+  width: 100%;
+}
+
+.content_header_information {
+  display: flex;
+  gap: 1rem;
+}
+
+.content_header_information_text {
+  width: 100%;
+}
+
+.text_info {
+  font-size: 22px;
+  color: red;
+  font-weight: 800;
+}
+
+.text_info_additionally {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.content_header_info_telephone {
+  display: flex;
+  gap: 1rem;
+}
+
+.text_info_additionally_type {
+  font-size: 1.5rem;
+  color: gray;
+  display: flex;
+  justify-content: end;
+}
+
+.telephone_size {
+  font-size: 2.5rem;
+  text-decoration: none;
+  color: #00537a;
+  font-weight: 800;
+}
+
+.content_header_buttons {
+  display: flex;
+  gap: 1rem;
+}
+
+.languages {
+  font-size: 1.5rem;
+  color: #00537a;
+  border: 2px solid;
+  border-radius: 2rem;
+  height: 3.7rem;
+}
+
+.city {
+  font-size: 1.5rem;
+  color: #00537a;
+  border: 2px solid;
+  border-radius: 2rem;
+  height: 3.7rem;
+}
+
+.button_show {
+  font-size: 1.5rem;
+  color: white;
+  width: 10.8rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid #0079ae;
+  border-radius: 0.5rem;
+  background-color: #0079ae;
+}
