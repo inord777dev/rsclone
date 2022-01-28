@@ -6,6 +6,7 @@ import Header from './header/header';
 import Navigation from './navigation/navigftion';
 import PizzaCatalog from './pizzaCatalog/pizzaCatalog';
 import PizzaCard from './pizzaCatalog/pizzaCard/pizzaCard';
+// import Login from '../login/login';
 
 export default function Main() {
   const pizzas: Pizza[] = [{
@@ -45,5 +46,6 @@ export default function Main() {
         {contex}
       </div>
     </div>
+    // <Login />
   );
 }
