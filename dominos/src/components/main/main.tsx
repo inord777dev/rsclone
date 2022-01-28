@@ -7,6 +7,7 @@ import Navigation from './navigation/navigftion';
 import PizzaCatalog from './pizzaCatalog/pizzaCatalog';
 import PizzaCard from './pizzaCatalog/pizzaCard/pizzaCard';
 // import Login from '../login/login';
+// import User from '../user/user';
 
 export default function Main() {
   const pizzas: Pizza[] = [{
@@ -47,5 +48,6 @@ export default function Main() {
       </div>
     </div>
     // <Login />
+    // <User />
   );
 }

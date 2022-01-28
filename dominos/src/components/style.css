@@ -4,6 +4,88 @@
   padding: 0;
 }
 
+.profile {
+  width: 100vw;
+  height: 80vh;
+  display: flex;
+}
+
+.info {
+  flex: 1;
+}
+
+.history {
+  flex: 1;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.headerTitle {
+  font-family: Ubuntu,sans-serif;
+  font-size: 36px;
+  font-weight: 400;
+  color: inherit;
+  margin-top: 0;
+  margin-bottom: 0;
+  color: #00537a;
+}
+
+.linkExit {
+  color: #00537a;
+  text-decoration: none;
+}
+
+.bonusIcon {
+  width: 24px;
+  height: 24px;
+}
+
+.label {
+  font-family: Ubuntu,sans-serif;
+  font-size: 12px;
+  color: rgba(67,82,90,.54);
+}
+
+.btnSave {
+  background: #e31837;
+  color: #fff;
+}
+
+.btnMenu {
+  background: #0079ae;
+}
+
+.btn {
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  min-width: 110px;
+  padding: 10px;
+  margin: 0;
+  border: 0;
+  border-radius: 5px;
+  font-size: 14px;
+  line-height: 16px;
+  color: #fff;
+  text-align: center;
+  text-decoration: none;
+  -webkit-transition: background-color .3s linear,opacity .3s linear;
+  transition: background-color .3s linear,opacity .3s linear;
+  cursor: pointer;
+  position: relative;
+}
+
+
 .login__overlay {
   position: absolute;
   top: 0;
@@ -146,7 +228,7 @@
   margin-top: 30px;
 }
 
-.login__input {
+.input {
  width: 100%;
 
  -webkit-appearance: none;
@@ -160,16 +242,10 @@
  border: 0;
  border-bottom: 1px solid #ebeced;
 
- background-color: #e8f0fe;
+ /* background-color: #e8f0fe; */
 }
 
 .login__form-edit-item {
   width: 100%;
-
 }
 
-.login__label {
-  font-family: Ubuntu,sans-serif;
-  font-size: 12px;
-  color: rgba(67,82,90,.54);
-}
