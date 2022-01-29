@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="profile">
+      <div class="info">
+        <div class="header">
+          <div class="headerTitle">Профиль</div>
+          <div class="linkExit"><a href="#">Выйти</a></div>
+        </div>
+        <div class="user box">
+          <div class="title">Личные данные</div>
+          <div class="editItem">
+            <label class="label" htmlFor="userEmail">
+              Email
+              <input
+                class="input"
+                type="text"
+                id="userEmail"
+              />
+            </label>
+          </div>
+          <div class="editItem">
+            <label class="label" htmlFor="userName">
+              Имя
+              <input
+                class="input"
+                type="text"
+                id="userName"
+              />
+            </label>
+          </div>
+          <div class="editItem">
+            <label class="label" htmlFor="userTel">
+              Телефон
+              <input
+                class="input"
+                type="tel"
+                id="userTel"
+              />
+            </label>
+          </div>
+        </div>
+        <div class="bonus box">
+          <div class="title">Накоплено бонусов 0</div>
+          <div class="title">
+            Узнайте, сколько бонусов у вас будет
+            <input type="date" value="2022.02.01" />
+            <span class="bonusCount">0 бонусов</span>
+          </div>
+          <div class="editItem">
+            <label class="label" htmlFor="bonusPromo">
+              Введите промокод на бонусы
+              <span>
+                <svg class="bonusIcon" focusable="false" viewBox="0 0 24 24" aria-hidden="true">
+                  <path
+                    d="M11 17h2v-6h-2v6zm1-15C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zM11 9h2V7h-2v2z"
+                  ></path>
+                </svg>
+              </span>
+              <input
+                class="input"
+                type="text"
+                id="bonusPromo"
+              />
+            </label>
+          </div>
+        </div>
+        <div class="address">
+          <div class="title">Адрес доставки</div>
+          <div class="editItem">
+            <label class="label" htmlFor="addressCity">
+              Город
+              <input
+                class="input"
+                type="text"
+                id="addressCity"
+              />
+            </label>
+          </div>
+          <div class="editItem">
+            <label class="label" htmlFor="addressStreet">
+              Улица
+              <input
+                class="input"
+                type="text"
+                id="addressStreet"
+              />
+            </label>
+          </div>
+          <div class="editItem">
+            <label class="label" htmlFor="addressHome">
+              Дом
+              <input
+                class="input"
+                type="text"
+                id="addressHome"
+              />
+            </label>
+          </div>
+          <div class="editItem">
+            <label class="label" htmlFor="addressFlat">
+              Квартира
+              <input
+                class="input"
+                type="text"
+                id="addressFlat"
+              />
+            </label>
+          </div>
+          <div class="editItem">
+            <label class="label" htmlFor="addressStage">
+              Этаж
+              <input
+                class="input"
+                type="text"
+                id="addressStage"
+              />
+            </label>
+          </div>
+          <div class="editItem">
+            <label class="label" htmlFor="addressGate">
+              Подъезд
+              <input
+                class="input"
+                type="text"
+                id="addressStage"
+              />
+            </label>
+          </div>
+          <div class="editItem">
+            <label class="label" htmlFor="addressCode">
+              Код двери
+              <input
+                class="input"
+                type="text"
+                id="addressCode"
+              />
+            </label>
+          </div>
+        </div>
+        <div class="save box">
+          <button class="btnSave btn" type="button">Сохранить</button>
+        </div>
+      </div>
+      <div class="history">
+        <div class="header">
+          <div class="headerTitle">История заказов</div>
+        </div>
+        <div class="history__item">Кажется, вы еще ничего не заказывали...</div>
+        <button class="btnMenu btn" type="button">Посмотреть меню</button>
+      </div>
+    </div>
+
+  </body>
+</html>

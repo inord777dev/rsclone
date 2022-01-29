@@ -9,7 +9,7 @@ module.exports = {
         "airbnb/hooks",
         "plugin:@typescript-eslint/recommended",
         "plugin:@typescript-eslint/recommended-requiring-type-checking",
-        "plugin:import/errors", 
+        "plugin:import/errors",
         "plugin:import/warnings",
         "plugin:import/typescript"
     ],
@@ -27,6 +27,7 @@ module.exports = {
         "@typescript-eslint/eslint-plugin"
     ],
     "rules": {
-        "react/jsx-filename-extension": [0, { "extensions": [".ts", ".tsx"] }]
+        "react/jsx-filename-extension": [0, { "extensions": [".ts", ".tsx"] }],
+        "import/no-extraneous-dependencies": ["error", {"devDependencies": true}]
     }
 }

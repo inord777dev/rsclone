@@ -3,7 +3,11 @@ import React from 'react';
 import style from './header.module.scss';
 import companyLogo from '../../../assets/front/logo_header.png';
 
-export default function Header() {
+type HeaderProps = {
+  onModalClick: () => void
+};
+
+export default function Header({ onModalClick }:HeaderProps) {
   return (
     <div className={style.content_header_bg}>
       <div className={style.content_header}>
@@ -39,9 +43,9 @@ export default function Header() {
             <option value="ENG">Гродно</option>
             <option value="ENG">Бобруйск</option>
           </select>
-          <div className={style.button_show}>
+          <button type="button" className={style.button_show} onClick={onModalClick}>
             Войти
-          </div>
+          </button>
         </div>
       </div>
     </div>
