@@ -9,11 +9,13 @@ import PizzaCatalog from './pizzaCatalog/pizzaCatalog';
 import PizzaCard from './pizzaCatalog/pizzaCard/pizzaCard';
 
 import Login from '../login/login';
-// import User from '../user/user';
+import Profile from '../profile/profile';
 
 export default function Main() {
   const [pizzas, setPizzas] = useState<Pizza[]>([]);
-  const [isModal, setIsModal] = useState(false);
+  const [loginVisible, loginVisibleSet] = useState(false);
+  const [profileVisible, profileVisibleSet] = useState(false);
+  const [currentUser, currentUserSet] = useState<string | null>(null);
 
   useEffect(() => {
     async function fetchData() {
@@ -23,20 +25,44 @@ export default function Main() {
           setPizzas(response?.data);
         });
     }
-    fetchData().then(() => {}).catch(() => {});
+    fetchData()
+      .then(() => {})
+      .catch(() => {});
   }, []);
 
-  const onModalShow = () => {
-    setIsModal(true);
+  const onLoginShow = () => {
+    if (currentUser) {
+      profileVisibleSet(true);
+    } else {
+      loginVisibleSet(true);
+    }
   };
 
-  const onModalClose = () => {
-    setIsModal(false);
+  const onLoginClose = () => {
+    loginVisibleSet(false);
   };
 
-  return (
+  const onCurrentUserSet = () => {
+    currentUserSet('Andrei');
+    if (!currentUser) {
+      loginVisibleSet(false);
+    }
+  };
+
+  const onProfileSave = () => {
+    profileVisibleSet(false);
+    console.log(1);
+  };
+
+  return profileVisible ? (
     <div className={style.wrapper}>
-      <Header onModalClick={onModalShow} />
+      <Header onLoginShow={onLoginShow} currentUser={currentUser} />
+      <Navigation />
+      <Profile onProfileSave={onProfileSave} currentUser={currentUser} />
+    </div>
+  ) : (
+    <div className={style.wrapper}>
+      <Header onLoginShow={onLoginShow} currentUser={currentUser} />
       <Navigation />
       <PizzaCatalog />
       <div className={style.container_pizza}>
@@ -44,9 +70,11 @@ export default function Main() {
           <PizzaCard pizza={item} />
         ))}
       </div>
-      <Login isModal={isModal} onModalClick={onModalClose} />
+      <Login
+        loginVisible={loginVisible}
+        onLoginClose={onLoginClose}
+        onCurrentUserSet={onCurrentUserSet}
+      />
     </div>
-
-  // <User />
   );
 }

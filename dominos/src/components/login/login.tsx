@@ -2,12 +2,13 @@ import React from 'react';
 import style from './login.module.scss';
 
 type LoginProps = {
-  isModal: boolean;
-  onModalClick: () => void;
+  loginVisible: boolean;
+  onLoginClose: () => void;
+  onCurrentUserSet: () => void;
 };
 
-export default function Login({ isModal, onModalClick }: LoginProps) {
-  return !isModal ? null : (
+export default function Login({ loginVisible, onLoginClose, onCurrentUserSet }: LoginProps) {
+  return !loginVisible ? null : (
     <div>
       <div className={style.login__overlay} />
       <div className={style.login__outer}>
@@ -19,7 +20,7 @@ export default function Login({ isModal, onModalClick }: LoginProps) {
             <button
               className={style.login__formClose}
               type="button"
-              onClick={onModalClick}
+              onClick={onLoginClose}
             >
               <span>
                 <svg focusable="false" viewBox="0 0 24 24">
@@ -51,13 +52,13 @@ export default function Login({ isModal, onModalClick }: LoginProps) {
                   />
                 </label>
               </div>
-              <button className={style.login__btn} type="button">
+              <button className={style.login__btn} type="button" onClick={onCurrentUserSet}>
                 Boйти
               </button>
               <div>
                 <a
                   className={style.login__formEditLink}
-                  href="https://dominos.by/"
+                  href="/"
                 >
                   Забыли пароль?
                 </a>
@@ -65,7 +66,7 @@ export default function Login({ isModal, onModalClick }: LoginProps) {
               <div>
                 <a
                   className={style.login__formEditLink}
-                  href="https://dominos.by/"
+                  href="/"
                 >
                   Зарегистрироваться?
                 </a>
