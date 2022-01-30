@@ -4,10 +4,11 @@ import style from './header.module.scss';
 import companyLogo from '../../../assets/front/logo_header.png';
 
 type HeaderProps = {
-  onModalClick: () => void
+  currentUser: string | null;
+  onLoginShow: () => void
 };
 
-export default function Header({ onModalClick }:HeaderProps) {
+export default function Header({ onLoginShow, currentUser }:HeaderProps) {
   return (
     <div className={style.content_header_bg}>
       <div className={style.content_header}>
@@ -43,8 +44,8 @@ export default function Header({ onModalClick }:HeaderProps) {
             <option value="ENG">Гродно</option>
             <option value="ENG">Бобруйск</option>
           </select>
-          <button type="button" className={style.button_show} onClick={onModalClick}>
-            Войти
+          <button type="button" className={style.button_show} onClick={onLoginShow}>
+            {currentUser == null ? 'Войти' : 'Профиль'}
           </button>
         </div>
       </div>
