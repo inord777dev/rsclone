@@ -3,10 +3,10 @@ import React from 'react';
 import style from './pizzaCard.module.scss';
 import cheeseBoard from '../../../../assets/front/cheeseBoard.png';
 import mozarella from '../../../../assets/front/mozarella.png';
-import { Pizza } from '../../../../common/types';
+import { IPizza } from '../../../../common/types';
 
 type PizzaCardProps = {
-  pizza: Pizza
+  pizza: IPizza
 };
 
 export default function PizzaCard(props:PizzaCardProps) {

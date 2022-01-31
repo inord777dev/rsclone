@@ -1,13 +1,36 @@
-import React from 'react';
+import React, { useState } from 'react';
 import style from './login.module.scss';
+import { ICurrentUser } from '../../common/types';
 
 type LoginProps = {
   loginVisible: boolean;
+  currentUser: ICurrentUser;
   onLoginClose: () => void;
-  onCurrentUserSet: () => void;
+  onCurrentUserSet: (user: ICurrentUser) => void;
 };
 
-export default function Login({ loginVisible, onLoginClose, onCurrentUserSet }: LoginProps) {
+export default function Login({
+  loginVisible, onLoginClose, onCurrentUserSet, currentUser,
+}: LoginProps) {
+  const [password, setPassword] = useState('');
+
+  const onPasswordChaned = (e: React.FormEvent<HTMLInputElement>) => {
+    setPassword((e.target as HTMLInputElement).value);
+  };
+
+  const onEmailChange = (e: React.FormEvent<HTMLInputElement>) => {
+    const user = { ...currentUser };
+    user.email = (e.target as HTMLInputElement).value;
+    onCurrentUserSet(user);
+  };
+
+  const onEnter = () => {
+    const user = { ...currentUser };
+    user.id = '1';
+    onCurrentUserSet(user);
+    onLoginClose();
+  };
+
   return !loginVisible ? null : (
     <div>
       <div className={style.login__overlay} />
@@ -39,6 +62,8 @@ export default function Login({ loginVisible, onLoginClose, onCurrentUserSet }: 
                     className={style.login__input}
                     type="text"
                     id="loginEMail"
+                    value={currentUser.email}
+                    onChange={onEmailChange}
                   />
                 </label>
               </div>
@@ -49,20 +74,22 @@ export default function Login({ loginVisible, onLoginClose, onCurrentUserSet }: 
                     className={style.login__input}
                     type="password"
                     id="loginPass"
+                    value={password}
+                    onChange={onPasswordChaned}
                   />
                 </label>
               </div>
-              <button className={style.login__btn} type="button" onClick={onCurrentUserSet}>
+              <button className={style.login__btn} type="button" onClick={onEnter}>
                 Boйти
               </button>
-              <div>
+              {/* <div>
                 <a
                   className={style.login__formEditLink}
                   href="/"
                 >
                   Забыли пароль?
                 </a>
-              </div>
+              </div> */}
               <div>
                 <a
                   className={style.login__formEditLink}

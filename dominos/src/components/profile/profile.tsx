@@ -1,8 +1,9 @@
 import React, { FormEvent, useState } from 'react';
+import { ICurrentUser } from '../../common/types';
 import style from './profile.module.scss';
 
 type ProfileProps = {
-  currentUser: string | null;
+  currentUser: ICurrentUser;
   onProfileSave: () => void
 };
 
@@ -30,19 +31,19 @@ export default function Profile({ onProfileSave, currentUser }:ProfileProps) {
             <div className={style.editItem}>
               <label className={style.editItem__label} htmlFor="userEmail">
                 Email
-                <input className={`${style.editItem__input} ${style.input__disabled}`} type="text" id="userEmail" value="inord777@gmail.com" />
+                <input className={`${style.editItem__input} ${style.input__disabled}`} type="text" id="userEmail" value={currentUser.email} />
               </label>
             </div>
             <div className={style.editItem}>
               <label className={style.editItem__label} htmlFor="userName">
                 Имя
-                <input className={style.editItem__input} type="text" id="userName" value={currentUser == null ? '' : currentUser} />
+                <input className={style.editItem__input} type="text" id="userName" value={currentUser.name} />
               </label>
             </div>
             <div className={style.editItem}>
               <label className={style.editItem__label} htmlFor="userTel">
                 Телефон
-                <input className={style.editItem__input} type="tel" id="userTel" />
+                <input className={style.editItem__input} type="tel" id="userTel" value="+375" />
               </label>
             </div>
           </div>

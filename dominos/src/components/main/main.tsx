@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-import { Pizza } from '../../common/types';
+import { IPizza, ICurrentUser } from '../../common/types';
 import style from './main.module.scss';
 import Header from './header/header';
 import Navigation from './navigation/navigftion';
@@ -12,15 +12,20 @@ import Login from '../login/login';
 import Profile from '../profile/profile';
 
 export default function Main() {
-  const [pizzas, setPizzas] = useState<Pizza[]>([]);
+  const [pizzas, setPizzas] = useState<IPizza[]>([]);
   const [loginVisible, loginVisibleSet] = useState(false);
   const [profileVisible, profileVisibleSet] = useState(false);
-  const [currentUser, currentUserSet] = useState<string | null>(null);
+  const [currentUser, setCurrentUser] = useState<ICurrentUser>({
+    id: '',
+    name: '',
+    email: '',
+    password: '',
+  });
 
   useEffect(() => {
     async function fetchData() {
       await axios
-        .get<Pizza[]>('https://rs-clone-pizza-service.herokuapp.com/pizzas')
+        .get<IPizza[]>('https://rs-clone-pizza-service.herokuapp.com/pizzas')
         .then((response) => {
           setPizzas(response?.data);
         });
@@ -31,7 +36,7 @@ export default function Main() {
   }, []);
 
   const onLoginShow = () => {
-    if (currentUser) {
+    if (currentUser.id) {
       profileVisibleSet(true);
     } else {
       loginVisibleSet(true);
@@ -42,16 +47,12 @@ export default function Main() {
     loginVisibleSet(false);
   };
 
-  const onCurrentUserSet = () => {
-    currentUserSet('Andrei');
-    if (!currentUser) {
-      loginVisibleSet(false);
-    }
+  const onCurrentUserSet = (user: ICurrentUser) => {
+    setCurrentUser(user);
   };
 
   const onProfileSave = () => {
     profileVisibleSet(false);
-    console.log(1);
   };
 
   return profileVisible ? (
@@ -66,12 +67,13 @@ export default function Main() {
       <Navigation />
       <PizzaCatalog />
       <div className={style.container_pizza}>
-        {pizzas.map((item: Pizza) => (
+        {pizzas.map((item: IPizza) => (
           <PizzaCard pizza={item} />
         ))}
       </div>
       <Login
         loginVisible={loginVisible}
+        currentUser={currentUser}
         onLoginClose={onLoginClose}
         onCurrentUserSet={onCurrentUserSet}
       />

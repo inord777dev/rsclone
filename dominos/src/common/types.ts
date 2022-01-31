@@ -1,4 +1,4 @@
-export interface Pizza {
+export interface IPizza {
   id: string
   key: string
   name: string
@@ -7,4 +7,11 @@ export interface Pizza {
   price: string
   weith: string
   isHit: boolean,
+}
+
+export interface ICurrentUser {
+  id: string
+  name : string
+  email: string
+  password: string
 }
