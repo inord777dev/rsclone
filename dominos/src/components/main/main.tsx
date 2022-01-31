@@ -10,6 +10,7 @@ import PizzaCard from './pizzaCatalog/pizzaCard/pizzaCard';
 
 import Login from '../login/login';
 import Profile from '../profile/profile';
+// import CookieService from '../../services/CookieService';
 
 export default function Main() {
   const [pizzas, setPizzas] = useState<IPizza[]>([]);

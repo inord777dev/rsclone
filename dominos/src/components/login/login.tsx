@@ -56,9 +56,9 @@ export default function Login({
           const user = { ...currentUser };
           user.id = data.userId;
           user.name = data.name;
-          onCurrentUserSet(user);
           localStorage.setItem('currentUser', JSON.stringify(currentUser));
-          CookieService.setToken(data.token);
+          CookieService.login(user.id, data.token);
+          onCurrentUserSet(user);
           onLoginClose();
         }
       }).catch(() => {

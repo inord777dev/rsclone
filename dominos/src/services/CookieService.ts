@@ -1,17 +1,47 @@
-import Cookie from 'universal-cookie';
+import Cookie, { CookieSetOptions } from 'universal-cookie';
 
-const cookie = new Cookie();
+class CookieService {
+  cookie: Cookie;
 
-export default class CookieService {
-  static getToken() : string {
-    return cookie.get('access_token') as string;
+  constructor() {
+    this.cookie = new Cookie();
   }
 
-  static setToken(token: string) : void {
+  get(key: string) : string {
+    return this.cookie.get(key) as string;
+  }
+
+  set(key: string, value :string, date : Date) : void {
+    this.cookie.set(key, value, { path: '/', expires: date });
+  }
+
+  getToken() : string {
+    return this.get('access_token');
+  }
+
+  getUserId() : string {
+    return this.get('userId');
+  }
+
+  setUserId(userId : string, options : CookieSetOptions) {
+    this.cookie.set('userId', userId, options);
+  }
+
+  setToken(token : string, options : CookieSetOptions) {
+    this.cookie.set('access_token', token, options);
+  }
+
+  login(userId : string, token: string) : void {
     const date = new Date();
-    date.setTime(date.getTime() + 20 * 60 * 60 * 1000);
-    console.log(CookieService.getToken());
-    cookie.set('access_token', token, { path: '/' });
-    console.log(CookieService.getToken());
+    date.setTime(date.getTime() + 24 * 60 * 60 * 1000);
+    const options : CookieSetOptions = { path: '/', expires: date };
+    this.setUserId(userId, options);
+    this.setToken(token, options);
+  }
+
+  isLogin() : boolean {
+    return this.getUserId() !== undefined && this.getToken() !== undefined;
   }
 }
+
+export default new CookieService();
