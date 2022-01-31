@@ -46,7 +46,7 @@ export default function Header({ onLoginShow, currentUser }:HeaderProps) {
             <option value="ENG">Бобруйск</option>
           </select>
           <button type="button" className={style.button_show} onClick={onLoginShow}>
-            {currentUser.id === '' ? 'Войти' : 'Профиль'}
+            {currentUser.id === '' ? 'Войти' : 'Профиль' }
           </button>
         </div>
       </div>

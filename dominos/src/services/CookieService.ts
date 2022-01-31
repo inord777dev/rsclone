@@ -3,6 +3,10 @@ import Cookie, { CookieSetOptions } from 'universal-cookie';
 class CookieService {
   cookie: Cookie;
 
+  private keyToken = 'access_token';
+
+  private keyUserId = 'userId';
+
   constructor() {
     this.cookie = new Cookie();
   }
@@ -16,19 +20,19 @@ class CookieService {
   }
 
   getToken() : string {
-    return this.get('access_token');
+    return this.get(this.keyToken);
   }
 
   getUserId() : string {
-    return this.get('userId');
+    return this.get(this.keyUserId);
   }
 
   setUserId(userId : string, options : CookieSetOptions) {
-    this.cookie.set('userId', userId, options);
+    this.cookie.set(this.keyUserId, userId, options);
   }
 
   setToken(token : string, options : CookieSetOptions) {
-    this.cookie.set('access_token', token, options);
+    this.cookie.set(this.keyToken, token, options);
   }
 
   login(userId : string, token: string) : void {

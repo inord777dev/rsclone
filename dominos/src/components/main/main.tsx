@@ -10,7 +10,7 @@ import PizzaCard from './pizzaCatalog/pizzaCard/pizzaCard';
 
 import Login from '../login/login';
 import Profile from '../profile/profile';
-// import CookieService from '../../services/CookieService';
+import CookieService from '../../services/CookieService';
 
 export default function Main() {
   const [pizzas, setPizzas] = useState<IPizza[]>([]);
@@ -34,8 +34,12 @@ export default function Main() {
       .then(() => {})
       .catch(() => {});
     const localStorageUser = localStorage.getItem('currentUser');
-    if (localStorageUser) {
+    if (localStorageUser !== null) {
       const user = JSON.parse(localStorageUser) as ICurrentUser;
+      const userId = CookieService.getUserId();
+      if (userId !== undefined) {
+        user.id = CookieService.getUserId();
+      }
       setCurrentUser(user);
     }
   }, []);
