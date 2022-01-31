@@ -19,7 +19,6 @@ export default function Main() {
     id: '',
     name: '',
     email: '',
-    password: '',
   });
 
   useEffect(() => {
@@ -33,6 +32,11 @@ export default function Main() {
     fetchData()
       .then(() => {})
       .catch(() => {});
+    const localStorageUser = localStorage.getItem('currentUser');
+    if (localStorageUser) {
+      const user = JSON.parse(localStorageUser) as ICurrentUser;
+      setCurrentUser(user);
+    }
   }, []);
 
   const onLoginShow = () => {

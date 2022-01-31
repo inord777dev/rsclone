@@ -2,7 +2,7 @@ import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import './App.css';
 import Main from './components/main/main';
-import Profile from './components/profile/profile';
+// import Profile from './components/profile/profile';
 
 function App() {
   return (

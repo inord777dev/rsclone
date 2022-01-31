@@ -1,12 +1,26 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import style from './login.module.scss';
 import { ICurrentUser } from '../../common/types';
+import CookieService from '../../services/CookieService';
 
 type LoginProps = {
-  loginVisible: boolean;
-  currentUser: ICurrentUser;
-  onLoginClose: () => void;
-  onCurrentUserSet: (user: ICurrentUser) => void;
+  loginVisible: boolean,
+  currentUser: ICurrentUser,
+  onLoginClose: () => void,
+  onCurrentUserSet: (user: ICurrentUser) => void
+};
+
+type ReqData = {
+  email: string,
+  password: string,
+};
+
+type ResData = {
+  token: string;
+  refreshToken: string;
+  userId: string;
+  name: string;
 };
 
 export default function Login({
@@ -24,11 +38,37 @@ export default function Login({
     onCurrentUserSet(user);
   };
 
+  async function Signin() {
+    const reqData:ReqData = {
+      email: currentUser.email,
+      password,
+    };
+
+    await axios
+      .post('https://rs-clone-pizza-service.herokuapp.com/signin', JSON.stringify(reqData), {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+      .then((response) => {
+        if (response.status === 200) {
+          const data = response?.data as ResData;
+          const user = { ...currentUser };
+          user.id = data.userId;
+          user.name = data.name;
+          onCurrentUserSet(user);
+          localStorage.setItem('currentUser', JSON.stringify(currentUser));
+          CookieService.setToken(data.token);
+          onLoginClose();
+        }
+      }).catch(() => {
+      });
+  }
+
   const onEnter = () => {
-    const user = { ...currentUser };
-    user.id = '1';
-    onCurrentUserSet(user);
-    onLoginClose();
+    Signin()
+      .then(() => {})
+      .catch(() => {});
   };
 
   return !loginVisible ? null : (

@@ -6,12 +6,11 @@ export interface IPizza {
   image: string
   price: string
   weith: string
-  isHit: boolean,
+  isHit: boolean
 }
 
 export interface ICurrentUser {
   id: string
   name : string
   email: string
-  password: string
 }
