@@ -1,5 +1,8 @@
-import React, { FormEvent, useState } from 'react';
-import { ICurrentUser } from '../../common/types';
+import React, { FormEvent, useEffect, useState } from 'react';
+import axios from 'axios';
+
+import { ICurrentUser, IPizza } from '../../common/types';
+import CookieService from '../../services/CookieService';
 import style from './profile.module.scss';
 
 type ProfileProps = {
@@ -10,6 +13,28 @@ type ProfileProps = {
 export default function Profile({ onProfileSave, currentUser }:ProfileProps) {
   const [bonusDate, bonusDateSet] = useState('2022-02-21');
   const [bonusCount] = useState(0);
+
+  const token = CookieService.getToken();
+
+  useEffect(() => {
+    async function fetchData() {
+      await axios
+        .get<IPizza[]>(
+        `https://rs-clone-pizza-service.herokuapp.com/users/${currentUser.id}/settings`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        },
+      )
+        .then((response) => {
+          console.log(response.status);
+        });
+    }
+    fetchData()
+      .then(() => {})
+      .catch(() => {});
+  }, [currentUser, token]);
 
   const onChangeBonusDate = (e: FormEvent<HTMLInputElement>) => {
     const target = e.target as HTMLInputElement;
