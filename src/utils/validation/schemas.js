@@ -60,7 +60,8 @@ const schemas = {
         .min(1)
         .max(1000),
       optional: optionalScheme
-    })
+    }),
+  userSettings: Joi.object().options({ abortEarly: false, allowUnknown: false })
 };
 
 function optionalValidator(value, helpers) {

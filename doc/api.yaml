@@ -613,7 +613,7 @@ paths:
           content:
             application/json:
               schema:
-                  $ref: "#/components/schemas/Setting"
+                  $ref: "#/components/schemas/userSetting"
         401:
           $ref: '#/components/responses/UnauthorizedError'
         404:
@@ -631,20 +631,14 @@ paths:
               type: object
               title: example
               properties:
-                wordsPerDay:
-                  type: number
-                  description: The max number of learned words per day
-                optional:
-                  type: object
-                  items:
-                    type: any
+                  $ref: "#/components/schemas/UserPizza"
       responses:
         200:
           description: The settings has been created.
           content:
             application/json:
               schema:
-                  $ref: "#/components/schemas/Setting"
+                  $ref: "#/components/schemas/userSetting"
         400:
           description: Bad request
         401:
