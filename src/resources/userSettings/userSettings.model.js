@@ -16,6 +16,7 @@ const UserSettingsSchema = new Schema(
     home: String,
     flat: String,
     stage: String,
+    gate: String,
     code: String
   },
   { collection: 'userSettings' }
