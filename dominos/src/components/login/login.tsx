@@ -1,13 +1,76 @@
-import React from 'react';
+import React, { useState } from 'react';
+import axios from 'axios';
 import style from './login.module.scss';
+import { ICurrentUser } from '../../common/types';
+import CookieService from '../../services/CookieService';
 
 type LoginProps = {
-  loginVisible: boolean;
-  onLoginClose: () => void;
-  onCurrentUserSet: () => void;
+  loginVisible: boolean,
+  currentUser: ICurrentUser,
+  onLoginClose: () => void,
+  onCurrentUserSet: (user: ICurrentUser) => void
 };
 
-export default function Login({ loginVisible, onLoginClose, onCurrentUserSet }: LoginProps) {
+type ReqData = {
+  email: string,
+  password: string,
+};
+
+type ResData = {
+  token: string;
+  refreshToken: string;
+  userId: string;
+  name: string;
+};
+
+export default function Login({
+  loginVisible, onLoginClose, onCurrentUserSet, currentUser,
+}: LoginProps) {
+  const [password, setPassword] = useState('');
+
+  const onPasswordChaned = (e: React.FormEvent<HTMLInputElement>) => {
+    setPassword((e.target as HTMLInputElement).value);
+  };
+
+  const onEmailChange = (e: React.FormEvent<HTMLInputElement>) => {
+    const user = { ...currentUser };
+    user.email = (e.target as HTMLInputElement).value;
+    onCurrentUserSet(user);
+  };
+
+  async function Signin() {
+    const reqData:ReqData = {
+      email: currentUser.email,
+      password,
+    };
+
+    await axios
+      .post('https://rs-clone-pizza-service.herokuapp.com/signin', JSON.stringify(reqData), {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+      .then((response) => {
+        if (response.status === 200) {
+          const data = response?.data as ResData;
+          const user = { ...currentUser };
+          user.id = data.userId;
+          user.name = data.name;
+          localStorage.setItem('currentUser', JSON.stringify(currentUser));
+          CookieService.login(user.id, data.token);
+          onCurrentUserSet(user);
+          onLoginClose();
+        }
+      }).catch(() => {
+      });
+  }
+
+  const onEnter = () => {
+    Signin()
+      .then(() => {})
+      .catch(() => {});
+  };
+
   return !loginVisible ? null : (
     <div>
       <div className={style.login__overlay} />
@@ -39,6 +102,8 @@ export default function Login({ loginVisible, onLoginClose, onCurrentUserSet }: 
                     className={style.login__input}
                     type="text"
                     id="loginEMail"
+                    value={currentUser.email}
+                    onChange={onEmailChange}
                   />
                 </label>
               </div>
@@ -49,20 +114,22 @@ export default function Login({ loginVisible, onLoginClose, onCurrentUserSet }: 
                     className={style.login__input}
                     type="password"
                     id="loginPass"
+                    value={password}
+                    onChange={onPasswordChaned}
                   />
                 </label>
               </div>
-              <button className={style.login__btn} type="button" onClick={onCurrentUserSet}>
+              <button className={style.login__btn} type="button" onClick={onEnter}>
                 Boйти
               </button>
-              <div>
+              {/* <div>
                 <a
                   className={style.login__formEditLink}
                   href="/"
                 >
                   Забыли пароль?
                 </a>
-              </div>
+              </div> */}
               <div>
                 <a
                   className={style.login__formEditLink}

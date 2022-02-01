@@ -2,9 +2,10 @@
 import React from 'react';
 import style from './header.module.scss';
 import companyLogo from '../../../assets/front/logo_header.png';
+import { ICurrentUser } from '../../../common/types';
 
 type HeaderProps = {
-  currentUser: string | null;
+  currentUser: ICurrentUser;
   onLoginShow: () => void
 };
 
@@ -45,7 +46,7 @@ export default function Header({ onLoginShow, currentUser }:HeaderProps) {
             <option value="ENG">Бобруйск</option>
           </select>
           <button type="button" className={style.button_show} onClick={onLoginShow}>
-            {currentUser == null ? 'Войти' : 'Профиль'}
+            {currentUser.id === '' ? 'Войти' : 'Профиль' }
           </button>
         </div>
       </div>
