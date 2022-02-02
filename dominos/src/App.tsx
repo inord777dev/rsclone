@@ -7,12 +7,12 @@ import Main from './components/main/main';
 
 function App() {
   return (
-      <div className="App">
-        <Routes>
-          <Route path="/" element={<Main />} />
-          {/* <Route path="/user" element={<Profile />} /> */}
-        </Routes>
-      </div>
+    <div className="App">
+      <Routes>
+        <Route path="/" element={<Main />} />
+        {/* <Route path="/user" element={<Profile />} /> */}
+      </Routes>
+    </div>
   );
 }
 

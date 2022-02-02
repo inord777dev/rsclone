@@ -3,7 +3,7 @@ import axios from 'axios';
 
 import style from './main.module.scss';
 import Header from './header/header';
-import Navigation from './navigation/navigftion';
+import Navigation from './navigation/navigation';
 import PizzaCatalog from './pizzaCatalog/pizzaCatalog';
 import PizzaCard from './pizzaCatalog/pizzaCard/pizzaCard';
 

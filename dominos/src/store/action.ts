@@ -3,9 +3,7 @@ export const ADD_INGREDIENT = 'ADD_INGREDIENT';
 
 export function simulateHttpRequest(order: OrderAction) {
   return (dispatch: DispatchType) => {
-    setTimeout(() => {
-      dispatch(order);
-    }, 500);
+    dispatch(order);
   };
 }
 
