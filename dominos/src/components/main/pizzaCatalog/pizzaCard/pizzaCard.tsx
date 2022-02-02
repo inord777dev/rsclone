@@ -1,9 +1,12 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import React from 'react';
+import { Dispatch } from 'redux';
+import { useSelector, shallowEqual, useDispatch } from 'react-redux';
 import style from './pizzaCard.module.scss';
 import cheeseBoard from '../../../../assets/front/cheeseBoard.png';
 import mozarella from '../../../../assets/front/mozarella.png';
-import { IPizza } from '../../../../common/types';
+
+import { addArticle, removeArticle } from '../../../../store/action';
 
 type PizzaCardProps = {
   pizza: IPizza
@@ -11,6 +14,18 @@ type PizzaCardProps = {
 
 export default function PizzaCard(props:PizzaCardProps) {
   const { pizza } = props;
+
+  const orders: readonly IOrder[] = useSelector(
+    (state: OrderState) => state.orders,
+    shallowEqual,
+  );
+
+  const dispatch: Dispatch<any> = useDispatch();
+
+  const addOrder = React.useCallback(
+    (order: IOrder) => dispatch(addArticle(order)),
+    [dispatch],
+  );
 
   return (
     <div className={style.pizza_card}>

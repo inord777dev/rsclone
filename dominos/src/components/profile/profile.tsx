@@ -1,7 +1,6 @@
 import React, { FormEvent, useEffect, useState } from 'react';
 import axios from 'axios';
 
-import { ICurrentUser } from '../../common/types';
 import CookieService from '../../services/CookieService';
 import style from './profile.module.scss';
 
