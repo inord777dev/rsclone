@@ -30,20 +30,15 @@ interface ICurrentUser {
   email: string
 }
 
-interface IOrder {
-  id: number;
-  pizzaId: number;
+type OrderState = {
+  pizzas: IPizza[];
   ingredients: string[];
   price: number;
-}
-
-type OrderState = {
-  orders: IOrder[];
 };
 
 type OrderAction = {
   type: string
-  order: IOrder
+  payload: IPizza | string
 };
 
 type DispatchType = (args: OrderAction) => OrderAction;

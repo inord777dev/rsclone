@@ -1,12 +1,12 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-import React from 'react';
+import React, { useCallback } from 'react';
 import { Dispatch } from 'redux';
-import { useSelector, shallowEqual, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import style from './pizzaCard.module.scss';
 import cheeseBoard from '../../../../assets/front/cheeseBoard.png';
 import mozarella from '../../../../assets/front/mozarella.png';
 
-import { addArticle, removeArticle } from '../../../../store/action';
+import { addPizza, addIngredient } from '../../../../store/action';
 
 type PizzaCardProps = {
   pizza: IPizza
@@ -15,17 +15,29 @@ type PizzaCardProps = {
 export default function PizzaCard(props:PizzaCardProps) {
   const { pizza } = props;
 
-  const orders: readonly IOrder[] = useSelector(
-    (state: OrderState) => state.orders,
-    shallowEqual,
-  );
-
   const dispatch: Dispatch<any> = useDispatch();
 
-  const addOrder = React.useCallback(
-    (order: IOrder) => dispatch(addArticle(order)),
+  const addPizzaCallback = useCallback(
+    (item: IPizza) => dispatch(addPizza(item)),
     [dispatch],
   );
+
+  const addIngredientCallback = useCallback(
+    (item: string) => dispatch(addIngredient(item)),
+    [dispatch],
+  );
+
+  const onClickCheeseBoard = () => {
+    addIngredientCallback('cheeseBoard');
+  };
+
+  const onClickMozarella = () => {
+    addIngredientCallback('mozarella');
+  };
+
+  const onClickCart = () => {
+    addPizzaCallback(pizza);
+  };
 
   return (
     <div className={style.pizza_card}>
@@ -54,7 +66,7 @@ export default function PizzaCard(props:PizzaCardProps) {
           </div>
           <div className={style.add_with_pizza}>
             <div className={style.add_type_pizza}>
-              <svg className={style.container_add_pizza} width="26" height="26" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="rgb(0,121,174)"><g><path d="M11 11V7H13V11H17V13H13V17H11V13H7V11H11Z" /></g></svg>
+              <svg className={style.container_add_pizza} width="26" height="26" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="rgb(0,121,174)" onClick={onClickCheeseBoard}><g><path d="M11 11V7H13V11H17V13H13V17H11V13H7V11H11Z" /></g></svg>
               <img className={style.img_size} src={cheeseBoard} alt="no img" />
               <div className={style.container_name_add}>
                 Хот-Дог борт
@@ -66,7 +78,7 @@ export default function PizzaCard(props:PizzaCardProps) {
           </div>
           <div className={style.add_with_pizza}>
             <div className={style.add_type_pizza}>
-              <svg className={style.container_add_pizza} width="26" height="26" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="rgb(0,121,174)"><g><path d="M11 11V7H13V11H17V13H13V17H11V13H7V11H11Z" /></g></svg>
+              <svg className={style.container_add_pizza} width="26" height="26" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="rgb(0,121,174)" onClick={onClickMozarella}><g><path d="M11 11V7H13V11H17V13H13V17H11V13H7V11H11Z" /></g></svg>
               <img className={style.img_size} src={mozarella} alt="no img" />
               <div className={style.container_name_add}>
                 Моцарелла-mini
@@ -81,9 +93,7 @@ export default function PizzaCard(props:PizzaCardProps) {
               <span className={style.info_cash_color}>{pizza.price}</span>
               <span>{pizza.weith}</span>
             </div>
-            <div className={style.button_buy}>
-              В корзину
-            </div>
+            <button type="button" className={style.button_buy} onClick={onClickCart}>В корзину</button>
           </div>
         </div>
       </div>

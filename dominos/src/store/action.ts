@@ -1,5 +1,5 @@
-export const ADD_ORDER = 'ADD_ORDER';
-export const REMOVE_ORDER = 'REMOVE_ORDER';
+export const ADD_PIZZA = 'ADD_PIZZA';
+export const ADD_INGREDIENT = 'ADD_INGREDIENT';
 
 export function simulateHttpRequest(order: OrderAction) {
   return (dispatch: DispatchType) => {
@@ -9,18 +9,18 @@ export function simulateHttpRequest(order: OrderAction) {
   };
 }
 
-export function addArticle(order: IOrder) {
+export function addPizza(payload: IPizza) {
   const action: OrderAction = {
-    type: ADD_ORDER,
-    order,
+    type: ADD_PIZZA,
+    payload,
   };
   return simulateHttpRequest(action);
 }
 
-export function removeArticle(order: IOrder) {
+export function addIngredient(payload: string) {
   const action: OrderAction = {
-    type: REMOVE_ORDER,
-    order,
+    type: ADD_INGREDIENT,
+    payload,
   };
   return simulateHttpRequest(action);
 }
