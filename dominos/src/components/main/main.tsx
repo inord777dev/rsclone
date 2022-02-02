@@ -11,12 +11,9 @@ import PizzaCard from './pizzaCatalog/pizzaCard/pizzaCard';
 
 import Login from '../login/login';
 import Profile from '../profile/profile';
-<<<<<<< HEAD
 import CookieService from '../../services/CookieService';
-=======
 import Carusel from './carusel/carusel';
 import CaruselTwo from './caruselTwo/caruselTwo';
->>>>>>> KrisKip123
 
 export default function Main() {
   const [pizzas, setPizzas] = useState<IPizza[]>([]);
@@ -84,13 +81,8 @@ export default function Main() {
       <CaruselTwo />
       <PizzaCatalog />
       <div className={style.container_pizza}>
-<<<<<<< HEAD
         {pizzas.map((item: IPizza) => (
           <PizzaCard pizza={item} />
-=======
-        {pizzas.map((item: Pizza) => (
-          <PizzaCard pizza={item} key={item.id} />
->>>>>>> KrisKip123
         ))}
       </div>
       <Login
