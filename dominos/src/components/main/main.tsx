@@ -14,6 +14,8 @@ import Profile from '../profile/profile';
 import CookieService from '../../services/CookieService';
 import Carusel from './carusel/carusel';
 import CaruselTwo from './caruselTwo/caruselTwo';
+import Infographic from './infographic/infographic';
+import Footer from './footer/footer';
 
 export default function Main() {
   const [pizzas, setPizzas] = useState<IPizza[]>([]);
@@ -85,6 +87,8 @@ export default function Main() {
           <PizzaCard pizza={item} />
         ))}
       </div>
+      <Infographic />
+      <Footer />
       <Login
         loginVisible={loginVisible}
         currentUser={currentUser}

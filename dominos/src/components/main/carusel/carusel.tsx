@@ -28,8 +28,8 @@ export default function Carusel() {
           disableOnInteraction: false,
         }}
         centeredSlides
-        onSlideChange={() => console.log('slide change')}
-        onSwiper={(swiper) => console.log(swiper)}
+        // onSlideChange={() => console.log('slide change')}
+        // onSwiper={(swiper) => console.log(swiper)}
       >
         <SwiperSlide>
           <img src={slide1} alt="" />
