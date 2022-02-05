@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import style from './login.module.scss';
-import { ICurrentUser } from '../../common/types';
 import CookieService from '../../services/CookieService';
 
 type LoginProps = {

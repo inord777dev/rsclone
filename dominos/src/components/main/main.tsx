@@ -2,10 +2,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-import { IPizza, ICurrentUser } from '../../common/types';
 import style from './main.module.scss';
 import Header from './header/header';
-import Navigation from './navigation/navigftion';
+import Navigation from './navigation/navigation';
 import PizzaCatalog from './pizzaCatalog/pizzaCatalog';
 import PizzaCard from './pizzaCatalog/pizzaCard/pizzaCard';
 
@@ -84,7 +83,7 @@ export default function Main() {
       <PizzaCatalog />
       <div className={style.container_pizza}>
         {pizzas.map((item: IPizza) => (
-          <PizzaCard pizza={item} />
+          <PizzaCard key={item.id} pizza={item} />
         ))}
       </div>
       <Infographic />

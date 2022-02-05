@@ -28,6 +28,8 @@ module.exports = {
     ],
     "rules": {
         "react/jsx-filename-extension": [0, { "extensions": [".ts", ".tsx"] }],
-        "import/no-extraneous-dependencies": ["error", {"devDependencies": true}]
+        "import/no-extraneous-dependencies": ["error", {"devDependencies": true}],
+        "default-param-last": "off",
+        "@typescript-eslint/default-param-last": ["error"]
     }
 }
