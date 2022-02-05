@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
@@ -10,6 +11,10 @@ import PizzaCard from './pizzaCatalog/pizzaCard/pizzaCard';
 import Login from '../login/login';
 import Profile from '../profile/profile';
 import CookieService from '../../services/CookieService';
+import Carusel from './carusel/carusel';
+import CaruselTwo from './caruselTwo/caruselTwo';
+import Infographic from './infographic/infographic';
+import Footer from './footer/footer';
 
 export default function Main() {
   const [pizzas, setPizzas] = useState<IPizza[]>([]);
@@ -73,12 +78,16 @@ export default function Main() {
     <div className={style.wrapper}>
       <Header onLoginShow={onLoginShow} currentUser={currentUser} />
       <Navigation />
+      <Carusel />
+      <CaruselTwo />
       <PizzaCatalog />
       <div className={style.container_pizza}>
         {pizzas.map((item: IPizza) => (
           <PizzaCard key={item.id} pizza={item} />
         ))}
       </div>
+      <Infographic />
+      <Footer />
       <Login
         loginVisible={loginVisible}
         currentUser={currentUser}

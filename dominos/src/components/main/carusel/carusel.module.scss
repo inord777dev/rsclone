@@ -1,0 +1,16 @@
+.wrapper_swiper {
+  :global(.swiper-pagination) {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 800px;
+}
+:global(.swiper-pagination-bullet) {
+  background-color: #00537a;
+  opacity: 1;
+}
+
+  :global(.swiper-pagination-bullet-active) {
+  background-color: #e31837;
+  }
+
+}
