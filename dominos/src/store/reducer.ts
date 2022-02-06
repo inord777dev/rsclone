@@ -7,9 +7,22 @@ const initialState: GlobalState = {
     email: '',
   },
   order: {
-    pizzas: [],
+    products: [],
     ingredients: [],
     price: 0,
+    userSettings: {
+      userId: '',
+      name: '',
+      tel: '',
+      bonusCount: '',
+      city: '',
+      street: '',
+      home: '',
+      flat: '',
+      stage: '',
+      gate: '',
+      code: '',
+    },
   },
 };
 
@@ -32,15 +45,16 @@ const reducer = (
       currentUser: payload,
     };
   }
-  if (action.type === actionTypes.ADD_PIZZA) {
-    const payload = action.payload as IPizza;
-    const predicateHas = (item : IPizza) => item.id === payload.id;
-    const predicatHasNot = (item: IPizza) => item.id !== payload.id;
+  if (action.type === actionTypes.ADD_PRODUCT) {
+    const product = action.payload as IProduct;
+    product.count = 1;
+    const predicateHas = (item : IProduct) => item.id === product.id;
+    const predicatHasNot = (item: IProduct) => item.id !== product.id;
     return {
       ...state,
       order: {
         ...state.order,
-        pizzas: stateUpdated(payload, state.order.pizzas, predicateHas, predicatHasNot),
+        products: stateUpdated(product, state.order.products, predicateHas, predicatHasNot),
       },
     };
   }

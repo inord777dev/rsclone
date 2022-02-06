@@ -1,8 +1,8 @@
 export const INIT_USER = 'INIT_USER';
-export const ADD_PIZZA = 'ADD_PIZZA';
+export const ADD_PRODUCT = 'ADD_PRODUCT';
 export const ADD_INGREDIENT = 'ADD_INGREDIENT';
 
-export function simulateHttpRequest(action: GlobalAction) {
+export function onDispatch(action: GlobalAction) {
   return (dispatch: DispatchType) => {
     dispatch(action);
   };
@@ -13,15 +13,15 @@ export function initUser(user: ICurrentUser) {
     type: INIT_USER,
     payload: user,
   };
-  return simulateHttpRequest(action);
+  return onDispatch(action);
 }
 
-export function addPizza(payload: IPizza) {
+export function addProduct(payload: IProduct) {
   const action: GlobalAction = {
-    type: ADD_PIZZA,
+    type: ADD_PRODUCT,
     payload,
   };
-  return simulateHttpRequest(action);
+  return onDispatch(action);
 }
 
 export function addIngredient(payload: string) {
@@ -29,5 +29,5 @@ export function addIngredient(payload: string) {
     type: ADD_INGREDIENT,
     payload,
   };
-  return simulateHttpRequest(action);
+  return onDispatch(action);
 }

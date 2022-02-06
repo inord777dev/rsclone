@@ -2,23 +2,22 @@
 import React, { useCallback } from 'react';
 import { Dispatch } from 'redux';
 import { useDispatch } from 'react-redux';
+
 import style from './pizzaCard.module.scss';
+
 import cheeseBoard from '../../../../assets/front/cheeseBoard.png';
 import mozarella from '../../../../assets/front/mozarella.png';
-
-import { addPizza, addIngredient } from '../../../../store/action';
+import { addProduct, addIngredient } from '../../../../store/action';
 
 type PizzaCardProps = {
   pizza: IPizza
 };
 
-export default function PizzaCard(props:PizzaCardProps) {
-  const { pizza } = props;
-
+export default function PizzaCard({ pizza } : PizzaCardProps) {
   const dispatch: Dispatch<any> = useDispatch();
 
   const addPizzaCallback = useCallback(
-    (item: IPizza) => dispatch(addPizza(item)),
+    (item: IProduct) => dispatch(addProduct(item)),
     [dispatch],
   );
 
@@ -36,7 +35,7 @@ export default function PizzaCard(props:PizzaCardProps) {
   };
 
   const onClickCart = () => {
-    addPizzaCallback(pizza);
+    addPizzaCallback(pizza as IProduct);
   };
 
   return (

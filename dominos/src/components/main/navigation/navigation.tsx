@@ -7,14 +7,14 @@ import style from './navigation.module.scss';
 export default function Navigation() {
   const [price, setPrice] = useState(0);
 
-  const pizzas: readonly IPizza[] = useSelector(
-    (state: GlobalState) => state.order.pizzas,
+  const products: readonly IProduct[] = useSelector(
+    (state: GlobalState) => state.order.products,
     shallowEqual,
   );
 
   useEffect(() => {
     function priceUpdate() {
-      setPrice(pizzas.reduce((acc, item) => acc + parseFloat(item.price), 0));
+      setPrice(products.reduce((acc, item) => acc + parseFloat(item.price), 0));
     }
     priceUpdate();
   });
