@@ -1,9 +1,29 @@
 import * as actionTypes from './action';
 
-const initialState: OrderState = {
-  pizzas: [],
-  ingredients: [],
-  price: 0,
+const initialState: GlobalState = {
+  currentUser: {
+    id: '',
+    name: '',
+    email: '',
+  },
+  order: {
+    products: [],
+    ingredients: [],
+    price: 0,
+    userSettings: {
+      userId: '',
+      name: '',
+      tel: '',
+      bonusCount: '',
+      city: '',
+      street: '',
+      home: '',
+      flat: '',
+      stage: '',
+      gate: '',
+      code: '',
+    },
+  },
 };
 
 const stateUpdated = <T>(payload: T,
@@ -15,16 +35,27 @@ const stateUpdated = <T>(payload: T,
 
 const reducer = (
   // eslint-disable-next-line @typescript-eslint/default-param-last
-  state: OrderState = initialState,
-  action: OrderAction,
-): OrderState => {
-  if (action.type === actionTypes.ADD_PIZZA) {
-    const payload = action.payload as IPizza;
-    const predicateHas = (item : IPizza) => item.id === payload.id;
-    const predicatHasNot = (item: IPizza) => item.id !== payload.id;
+  state: GlobalState = initialState,
+  action: GlobalAction,
+): GlobalState => {
+  if (action.type === actionTypes.INIT_USER) {
+    const payload = action.payload as ICurrentUser;
     return {
       ...state,
-      pizzas: stateUpdated(payload, state.pizzas, predicateHas, predicatHasNot),
+      currentUser: payload,
+    };
+  }
+  if (action.type === actionTypes.ADD_PRODUCT) {
+    const product = action.payload as IProduct;
+    product.count = 1;
+    const predicateHas = (item : IProduct) => item.id === product.id;
+    const predicatHasNot = (item: IProduct) => item.id !== product.id;
+    return {
+      ...state,
+      order: {
+        ...state.order,
+        products: stateUpdated(product, state.order.products, predicateHas, predicatHasNot),
+      },
     };
   }
   if (action.type === actionTypes.ADD_INGREDIENT) {
@@ -33,7 +64,10 @@ const reducer = (
     const predicatHasNot = (item: string) => item !== payload;
     return {
       ...state,
-      ingredients: stateUpdated(payload, state.ingredients, predicateHas, predicatHasNot),
+      order: {
+        ...state.order,
+        ingredients: stateUpdated(payload, state.order.ingredients, predicateHas, predicatHasNot),
+      },
     };
   }
   return state;

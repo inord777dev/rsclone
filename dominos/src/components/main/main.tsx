@@ -1,30 +1,39 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
+import { Outlet, useOutletContext, useNavigate } from 'react-router';
+import { Dispatch } from 'redux';
+import { useDispatch } from 'react-redux';
 
 import style from './main.module.scss';
 import Header from './header/header';
 import Navigation from './navigation/navigation';
-import PizzaCatalog from './pizzaCatalog/pizzaCatalog';
-import PizzaCard from './pizzaCatalog/pizzaCard/pizzaCard';
-
 import Login from '../login/login';
-import Profile from '../profile/profile';
 import CookieService from '../../services/CookieService';
-import Carusel from './carusel/carusel';
-import CaruselTwo from './caruselTwo/caruselTwo';
 import Infographic from './infographic/infographic';
 import Footer from './footer/footer';
+import { initUser } from '../../store/action';
 
 export default function Main() {
+  const navigate = useNavigate();
   const [pizzas, setPizzas] = useState<IPizza[]>([]);
   const [loginVisible, loginVisibleSet] = useState(false);
-  const [profileVisible, profileVisibleSet] = useState(false);
   const [currentUser, setCurrentUser] = useState<ICurrentUser>({
     id: '',
     name: '',
     email: '',
   });
+
+  const dispatch: Dispatch<any> = useDispatch();
+
+  const initUserCallback = useCallback(
+    (user: ICurrentUser) => dispatch(initUser(user)),
+    [dispatch],
+  );
+
+  const onCurrentUserSet = (user: ICurrentUser) => {
+    setCurrentUser(user);
+  };
 
   useEffect(() => {
     async function fetchData() {
@@ -44,13 +53,14 @@ export default function Main() {
       if (userId !== undefined) {
         user.id = CookieService.getUserId();
       }
-      setCurrentUser(user);
+      onCurrentUserSet(user);
+      initUserCallback(user);
     }
-  }, []);
+  }, [initUserCallback]);
 
   const onLoginShow = () => {
     if (currentUser.id) {
-      profileVisibleSet(true);
+      navigate('user');
     } else {
       loginVisibleSet(true);
     }
@@ -60,32 +70,11 @@ export default function Main() {
     loginVisibleSet(false);
   };
 
-  const onCurrentUserSet = (user: ICurrentUser) => {
-    setCurrentUser(user);
-  };
-
-  const onProfileSave = () => {
-    profileVisibleSet(false);
-  };
-
-  return profileVisible ? (
+  return (
     <div className={style.wrapper}>
       <Header onLoginShow={onLoginShow} currentUser={currentUser} />
       <Navigation />
-      <Profile onProfileSave={onProfileSave} currentUser={currentUser} />
-    </div>
-  ) : (
-    <div className={style.wrapper}>
-      <Header onLoginShow={onLoginShow} currentUser={currentUser} />
-      <Navigation />
-      <Carusel />
-      <CaruselTwo />
-      <PizzaCatalog />
-      <div className={style.container_pizza}>
-        {pizzas.map((item: IPizza) => (
-          <PizzaCard key={item.id} pizza={item} />
-        ))}
-      </div>
+      <Outlet context={{ pizzas, currentUser }} />
       <Infographic />
       <Footer />
       <Login
@@ -96,4 +85,12 @@ export default function Main() {
       />
     </div>
   );
+}
+
+export function usePizzas() {
+  return useOutletContext<IPizza[]>();
+}
+
+export function useOutletContex() {
+  return useOutletContext<OutletContext>();
 }

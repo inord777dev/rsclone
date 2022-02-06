@@ -14,31 +14,58 @@ declare module '*.svg' {
 }
 
 interface IPizza {
-  id: string
-  key: string
-  name: string
-  ingredients: string
-  image: string
-  price: string
-  weith: string
-  isHit: boolean
+  id: string;
+  key: string;
+  name: string;
+  ingredients: string;
+  image: string;
+  price: string;
+  weith: string;
+  isHit: boolean;
+}
+
+interface IProduct extends IPizza {
+  count: number = 0;
 }
 
 interface ICurrentUser {
-  id: string
-  name : string
-  email: string
+  id: string = ''
+  name : string = ''
+  email: string = ''
 }
 
-type OrderState = {
-  pizzas: IPizza[];
-  ingredients: string[];
-  price: number;
+interface IOrder {
+  products: IProduct[] = []
+  ingredients: string[] = []
+  userSettings: UserSettings
+  price: number = 0
+}
+
+interface UserSettings {
+  [key: string]: string;
+  userId: string = ''
+  name: string = ''
+  tel: string = ''
+  bonusCount: string = ''
+  city: string = ''
+  street: string = ''
+  home: string = ''
+  flat: string = ''
+  stage: string = ''
+  gate: string = ''
+  code: string = ''
+}
+
+type GlobalState = {
+  currentUser: ICurrentUser
+  order: IOrder
 };
 
-type OrderAction = {
+type GlobalAction = {
   type: string
-  payload: IPizza | string
+  payload: IProduct | string | user | null
 };
 
-type DispatchType = (args: OrderAction) => OrderAction;
+type DispatchType = (args: GlobalAction) => GlobalAction;
+
+type OutletContext = { pizzas: IPizza[], currentUser: ICurrentUser };

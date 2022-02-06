@@ -1,24 +1,33 @@
-export const ADD_PIZZA = 'ADD_PIZZA';
+export const INIT_USER = 'INIT_USER';
+export const ADD_PRODUCT = 'ADD_PRODUCT';
 export const ADD_INGREDIENT = 'ADD_INGREDIENT';
 
-export function simulateHttpRequest(order: OrderAction) {
+export function onDispatch(action: GlobalAction) {
   return (dispatch: DispatchType) => {
-    dispatch(order);
+    dispatch(action);
   };
 }
 
-export function addPizza(payload: IPizza) {
-  const action: OrderAction = {
-    type: ADD_PIZZA,
+export function initUser(user: ICurrentUser) {
+  const action: GlobalAction = {
+    type: INIT_USER,
+    payload: user,
+  };
+  return onDispatch(action);
+}
+
+export function addProduct(payload: IProduct) {
+  const action: GlobalAction = {
+    type: ADD_PRODUCT,
     payload,
   };
-  return simulateHttpRequest(action);
+  return onDispatch(action);
 }
 
 export function addIngredient(payload: string) {
-  const action: OrderAction = {
+  const action: GlobalAction = {
     type: ADD_INGREDIENT,
     payload,
   };
-  return simulateHttpRequest(action);
+  return onDispatch(action);
 }

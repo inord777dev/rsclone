@@ -17,7 +17,7 @@ export default function Footer() {
           <a className={style.text} href="https://github.com/KrisKip123" target="_blank" rel="noreferrer">KrisKip123</a>
         </li>
         <li className={style.content}>
-          <span className={style.text}>Год создания: 2022</span>
+          <span className={style.text}>2022</span>
         </li>
         <li className={style.content}>
           <a href="https://rs.school/js/" target="_blank" rel="noreferrer"><img className={style.size_image} src={rs} alt="no img" /></a>

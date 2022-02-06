@@ -9,7 +9,7 @@ import './index.css';
 import App from './App';
 import reducer from './store/reducer';
 
-const store: Store<OrderState, OrderAction> & {
+const store: Store<GlobalState, GlobalAction> & {
   dispatch: DispatchType
 } = createStore(reducer, applyMiddleware(thunk));
 
