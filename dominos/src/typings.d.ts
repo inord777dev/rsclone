@@ -30,15 +30,37 @@ interface ICurrentUser {
   email: string
 }
 
-type OrderState = {
-  pizzas: IPizza[];
-  ingredients: string[];
-  price: number;
+interface IOrder {
+  pizzas: IPizza[]
+  ingredients: string[]
+  price: number
+}
+
+type GlobalState = {
+  currentUser: ICurrentUser;
+  order: IOrder;
 };
 
-type OrderAction = {
+type GlobalAction = {
   type: string
-  payload: IPizza | string
+  payload: IPizza | string | user | null
 };
 
-type DispatchType = (args: OrderAction) => OrderAction;
+type DispatchType = (args: GlobalAction) => GlobalAction;
+
+type UserSettings = {
+  [key: string]: string,
+  userId: string
+  name: string
+  tel: string
+  bonusCount: string
+  city: string
+  street: string
+  home: string
+  flat: string
+  stage: string
+  gate: string
+  code: string
+};
+
+type OutletContext = { pizzas: IPizza[], currentUser: ICurrentUser };

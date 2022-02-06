@@ -1,33 +1,18 @@
 import React, { FormEvent, useEffect, useState } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 import CookieService from '../../services/CookieService';
 import style from './profile.module.scss';
+import Address from '../address/address';
+import { useOutletContex } from '../main/main';
 
-type ProfileProps = {
-  currentUser: ICurrentUser
-  onProfileSave: () => void
-};
+export default function Profile() {
+  const { currentUser } = useOutletContex();
 
-type UserSettings = {
-  [key: string]: string,
-  userId: string
-  name: string
-  tel: string
-  bonusCount: string
-  city: string
-  street: string
-  home: string
-  flat: string
-  stage: string
-  gate: string
-  code: string
-};
-
-export default function Profile({ onProfileSave, currentUser }: ProfileProps) {
   const [bonusDate, bonusDateSet] = useState('2022-02-21');
   const [userSettings, setUserSettings] = useState<UserSettings>({
-    userId: currentUser.id,
+    userId: '',
     name: '',
     tel: '',
     bonusCount: '',
@@ -191,105 +176,7 @@ export default function Profile({ onProfileSave, currentUser }: ProfileProps) {
               </div>
             </div>
           </div>
-          <div className={style.address}>
-            <div className={style.address__title}>Адрес доставки</div>
-            <div className={style.bonus__content}>
-              <div className={style.editItem}>
-                <label className={style.editItem__label} htmlFor="addressCity">
-                  Город
-                  <input
-                    className={style.editItem__input}
-                    type="text"
-                    id="addressCity"
-                    value={userSettings.city}
-                    data-prop="city"
-                    onChange={onChangeUserSettings}
-                  />
-                </label>
-              </div>
-              <div className={style.editItem}>
-                <label
-                  className={style.editItem__label}
-                  htmlFor="addressStreet"
-                >
-                  Улица
-                  <input
-                    className={style.editItem__input}
-                    type="text"
-                    id="addressStreet"
-                    value={userSettings.street}
-                    data-prop="street"
-                    onChange={onChangeUserSettings}
-                  />
-                </label>
-              </div>
-              <div className={style.editItem}>
-                <label className={style.editItem__label} htmlFor="addressHome">
-                  Дом
-                  <input
-                    className={style.editItem__input}
-                    type="text"
-                    id="addressHome"
-                    value={userSettings.home}
-                    data-prop="home"
-                    onChange={onChangeUserSettings}
-                  />
-                </label>
-              </div>
-              <div className={style.editItem}>
-                <label className={style.editItem__label} htmlFor="addressFlat">
-                  Квартира
-                  <input
-                    className={style.editItem__input}
-                    type="text"
-                    id="addressFlat"
-                    value={userSettings.flat}
-                    data-prop="flat"
-                    onChange={onChangeUserSettings}
-                  />
-                </label>
-              </div>
-              <div className={style.editItem}>
-                <label className={style.editItem__label} htmlFor="addressStage">
-                  Этаж
-                  <input
-                    className={style.editItem__input}
-                    type="text"
-                    id="addressStage"
-                    value={userSettings.stage}
-                    data-prop="stage"
-                    onChange={onChangeUserSettings}
-                  />
-                </label>
-              </div>
-              <div className={style.editItem}>
-                <label className={style.editItem__label} htmlFor="addressGate">
-                  Подъезд
-                  <input
-                    className={style.editItem__input}
-                    type="text"
-                    id="addressGate"
-                    value={userSettings.gate}
-                    data-prop="gate"
-                    onChange={onChangeUserSettings}
-                  />
-                </label>
-              </div>
-              <div className={style.editItem}>
-                <label className={style.editItem__label} htmlFor="addressCode">
-                  Код двери
-                  <input
-                    className={style.editItem__input}
-                    type="text"
-                    id="addressCode"
-                    value={userSettings.code}
-                    data-prop="code"
-                    onChange={onChangeUserSettings}
-                  />
-                </label>
-              </div>
-            </div>
-          </div>
+          <Address userSettings={userSettings} onChangeUserSettings={onChangeUserSettings} />
           <div className={style.save}>
             <button
               className={style.btnSave}
@@ -309,13 +196,9 @@ export default function Profile({ onProfileSave, currentUser }: ProfileProps) {
               Кажется, вы еще ничего не заказывали...
             </div>
           </div>
-          <button
-            className={style.btnMenu}
-            type="button"
-            onClick={onProfileSave}
-          >
+          <Link to="/" className={style.btnMenu}>
             Посмотреть меню
-          </button>
+          </Link>
         </div>
       </div>
     </div>

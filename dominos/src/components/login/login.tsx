@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+
 import style from './login.module.scss';
 import CookieService from '../../services/CookieService';
 
@@ -25,6 +27,7 @@ type ResData = {
 export default function Login({
   loginVisible, onLoginClose, onCurrentUserSet, currentUser,
 }: LoginProps) {
+  const navigate = useNavigate();
   const [password, setPassword] = useState('');
 
   const onPasswordChaned = (e: React.FormEvent<HTMLInputElement>) => {
@@ -59,6 +62,7 @@ export default function Login({
           CookieService.login(user.id, data.token);
           onCurrentUserSet(user);
           onLoginClose();
+          navigate('/');
         }
       }).catch(() => {
       });

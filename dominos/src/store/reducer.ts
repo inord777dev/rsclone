@@ -1,9 +1,16 @@
 import * as actionTypes from './action';
 
-const initialState: OrderState = {
-  pizzas: [],
-  ingredients: [],
-  price: 0,
+const initialState: GlobalState = {
+  currentUser: {
+    id: '',
+    name: '',
+    email: '',
+  },
+  order: {
+    pizzas: [],
+    ingredients: [],
+    price: 0,
+  },
 };
 
 const stateUpdated = <T>(payload: T,
@@ -15,16 +22,26 @@ const stateUpdated = <T>(payload: T,
 
 const reducer = (
   // eslint-disable-next-line @typescript-eslint/default-param-last
-  state: OrderState = initialState,
-  action: OrderAction,
-): OrderState => {
+  state: GlobalState = initialState,
+  action: GlobalAction,
+): GlobalState => {
+  if (action.type === actionTypes.INIT_USER) {
+    const payload = action.payload as ICurrentUser;
+    return {
+      ...state,
+      currentUser: payload,
+    };
+  }
   if (action.type === actionTypes.ADD_PIZZA) {
     const payload = action.payload as IPizza;
     const predicateHas = (item : IPizza) => item.id === payload.id;
     const predicatHasNot = (item: IPizza) => item.id !== payload.id;
     return {
       ...state,
-      pizzas: stateUpdated(payload, state.pizzas, predicateHas, predicatHasNot),
+      order: {
+        ...state.order,
+        pizzas: stateUpdated(payload, state.order.pizzas, predicateHas, predicatHasNot),
+      },
     };
   }
   if (action.type === actionTypes.ADD_INGREDIENT) {
@@ -33,7 +50,10 @@ const reducer = (
     const predicatHasNot = (item: string) => item !== payload;
     return {
       ...state,
-      ingredients: stateUpdated(payload, state.ingredients, predicateHas, predicatHasNot),
+      order: {
+        ...state.order,
+        ingredients: stateUpdated(payload, state.order.ingredients, predicateHas, predicatHasNot),
+      },
     };
   }
   return state;
