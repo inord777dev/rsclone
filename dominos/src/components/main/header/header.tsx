@@ -2,6 +2,7 @@
 import React from 'react';
 import style from './header.module.scss';
 import companyLogo from '../../../assets/front/logo_header.png';
+import { ICurrentUser } from '../../../common/types';
 
 type HeaderProps = {
   currentUser: ICurrentUser;

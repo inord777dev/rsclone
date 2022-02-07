@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, shallowEqual } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { IProduct, GlobalState } from '../../../common/types';
 
 import style from './navigation.module.scss';
 

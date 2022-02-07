@@ -1,4 +1,4 @@
-@import '../../style/style.scss';
+@import '../../common/styles.scss';
 
 .profile {
   width: 100%;
@@ -70,6 +70,12 @@
   @extend %btn;
   background: #e31837;
   color: #fff;
+}
+
+.btnSave:disabled {
+  @extend %btn;
+  opacity: .5;
+  cursor: not-allowed;
 }
 
 .btnMenu {

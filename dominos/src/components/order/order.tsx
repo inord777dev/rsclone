@@ -1,32 +1,42 @@
 import React, {
-  FormEvent, useEffect, useState, useCallback,
+  FormEvent, useState, useCallback, useEffect,
 } from 'react';
 import { Dispatch } from 'redux';
 import { useSelector, shallowEqual, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { nanoid } from 'nanoid';
 
 import CookieService from '../../services/CookieService';
 import style from './order.module.scss';
 import Address from '../address/address';
 import { useOutletContex } from '../main/main';
 import Product from './product/product';
-import { addProduct } from '../../store/action';
+import { addProduct, clearProducts } from '../../store/action';
+import {
+  GlobalState, IOrder, IProduct, UserSettings,
+} from '../../common/types';
 
 export default function Order() {
   const { currentUser } = useOutletContex();
 
+  const order: IOrder = useSelector(
+    (state: GlobalState) => state.order,
+    shallowEqual,
+  );
+
   const dispatch: Dispatch<any> = useDispatch();
+
+  const aclearProductsCallback = useCallback(
+    () => dispatch(clearProducts()),
+    [dispatch],
+  );
 
   const addPizzaCallback = useCallback(
     (item: IProduct) => dispatch(addProduct(item)),
     [dispatch],
   );
 
-  const products: readonly IProduct[] = useSelector(
-    (state: GlobalState) => state.order.products,
-    shallowEqual,
-  );
   // const products: IProduct[] = [
   //   {
   //     id: '61ea9104363cc72043f121f5',
@@ -57,27 +67,8 @@ export default function Order() {
 
   const token = CookieService.getToken();
 
-  async function userSettingsSave() {
-    await axios
-      .put<UserSettings>(
-      `https://rs-clone-pizza-service.herokuapp.com/users/${currentUser.id}/settings`,
-      JSON.stringify(userSettings),
-      {
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
-        },
-      },
-    )
-      .then((response) => {
-        if (response.status === 200) {
-          setUserSettings(response?.data);
-        }
-      });
-  }
-
   useEffect(() => {
-    async function fetchData() {
+    async function getSettings() {
       await axios
         .get<UserSettings>(
         `https://rs-clone-pizza-service.herokuapp.com/users/${currentUser.id}/settings`,
@@ -93,10 +84,33 @@ export default function Order() {
           }
         });
     }
-    fetchData()
+    getSettings()
       .then(() => {})
       .catch(() => {});
   }, [currentUser, token]);
+
+  async function userOrderSend() {
+    const currentOrder = { ...order, userSettings };
+    const now = new Date();
+    currentOrder.date = now.toJSON();
+    currentOrder.orderId = nanoid();
+    await axios
+      .put<IOrder>(
+      `https://rs-clone-pizza-service.herokuapp.com/users/${currentUser.id}/orders/${currentOrder.orderId}`,
+      JSON.stringify(currentOrder),
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+      },
+    )
+      .then((response) => {
+        if (response.status === 200) {
+          aclearProductsCallback();
+        }
+      });
+  }
 
   const onChangeUserSettings = (e: FormEvent<HTMLInputElement>) => {
     const settings : UserSettings = { ...userSettings };
@@ -127,7 +141,8 @@ export default function Order() {
             <button
               className={style.btnSave}
               type="button"
-              onClick={userSettingsSave}
+              onClick={userOrderSend}
+              disabled={!order.products.length}
             >
               Отправить
             </button>
@@ -138,7 +153,7 @@ export default function Order() {
             <div className={style.header__title}>Ваш заказ</div>
           </div>
           <div className={style.history__context}>
-            { products.map((product) => (
+            { order.products.map((product) => (
               <Product product={product} onDeleteProduct={onDeleteProduct} />
             ))}
           </div>

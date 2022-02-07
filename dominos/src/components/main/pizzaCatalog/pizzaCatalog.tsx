@@ -1,6 +1,7 @@
 import React from 'react';
 import style from './pizzaCatalog.module.scss';
 import PizzaCard from './pizzaCard/pizzaCard';
+import { IPizza } from '../../../common/types';
 
 export default function PizzaCatalog(props : { pizzas: IPizza[] }) {
   const { pizzas } = props;

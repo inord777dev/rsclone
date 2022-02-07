@@ -1,4 +1,5 @@
 import React, { FormEvent } from 'react';
+import { UserSettings } from '../../common/types';
 import style from './address.module.scss';
 
 type AddressProps = {

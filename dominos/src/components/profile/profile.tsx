@@ -6,6 +6,7 @@ import CookieService from '../../services/CookieService';
 import style from './profile.module.scss';
 import Address from '../address/address';
 import { useOutletContex } from '../main/main';
+import { UserSettings, IOrder } from '../../common/types';
 
 export default function Profile() {
   const { currentUser } = useOutletContex();
@@ -24,6 +25,7 @@ export default function Profile() {
     gate: '',
     code: '',
   });
+  const [orders, setOrders] = useState<IOrder[]>([]);
 
   const token = CookieService.getToken();
 
@@ -47,7 +49,7 @@ export default function Profile() {
   }
 
   useEffect(() => {
-    async function fetchData() {
+    async function getSettings() {
       await axios
         .get<UserSettings>(
         `https://rs-clone-pizza-service.herokuapp.com/users/${currentUser.id}/settings`,
@@ -63,7 +65,26 @@ export default function Profile() {
           }
         });
     }
-    fetchData()
+    async function getOrders() {
+      await axios
+        .get<IOrder[]>(
+        `https://rs-clone-pizza-service.herokuapp.com/users/${currentUser.id}/orders`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        },
+      )
+        .then((response) => {
+          if (response.status === 200) {
+            setOrders(response?.data);
+          }
+        });
+    }
+    getSettings()
+      .then(() => {})
+      .catch(() => {});
+    getOrders()
       .then(() => {})
       .catch(() => {});
   }, [currentUser, token]);
@@ -193,7 +214,8 @@ export default function Profile() {
           </div>
           <div className={style.history__context}>
             <div className={style.history__item}>
-              Кажется, вы еще ничего не заказывали...
+              { !orders.length ? 'Кажется, вы еще ничего не заказывали...'
+                : orders.map((order) => <div>{order.date}</div>)}
             </div>
           </div>
           <Link to="/" className={style.btnMenu}>

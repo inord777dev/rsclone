@@ -1,3 +1,6 @@
+import {
+  GlobalState, OrderStatus, Payment, GlobalAction, ICurrentUser, IProduct,
+} from '../common/types';
 import * as actionTypes from './action';
 
 const initialState: GlobalState = {
@@ -7,9 +10,11 @@ const initialState: GlobalState = {
     email: '',
   },
   order: {
+    orderId: '',
     products: [],
     date: '',
     price: 0,
+    status: OrderStatus.Created,
     userSettings: {
       userId: '',
       name: '',
@@ -44,6 +49,12 @@ const reducer = (
     return {
       ...state,
       currentUser: payload,
+    };
+  }
+  if (action.type === actionTypes.CLEAR_PRODUCTS) {
+    return {
+      ...state,
+      order: { ...state.order, products: [] },
     };
   }
   if (action.type === actionTypes.ADD_PRODUCT) {
