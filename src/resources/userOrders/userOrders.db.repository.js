@@ -1,19 +1,11 @@
 const userOrders = require('./userOrders.model');
-const { NOT_FOUND_ERROR } = require('../../errors/appErrors');
 
-const get = async userId => {
-  const setting = await userOrders.findOne({ userId });
-  if (!setting) {
-    throw new NOT_FOUND_ERROR('Cannot find orders');
-  }
+const get = async userId => await userOrders.find({ userId });
 
-  return setting;
-};
-
-const upsert = async (userId, setting) =>
+const upsert = async (userId, orderId, order) =>
   userOrders.findOneAndUpdate(
-    { userId },
-    { $set: setting },
+    { userId, orderId },
+    { $set: order },
     { upsert: true, new: true }
   );
 

@@ -8,40 +8,20 @@ const UserOrdersSchema = new Schema(
       type: String,
       required: true
     },
-    products: [
-      {
-        id: String,
-        key: String,
-        name: String,
-        ingredients: String,
-        image: String,
-        price: String,
-        weith: String,
-        isHit: Boolean,
-        count: Number,
-        components: [
-          {
-            type: String
-          }
-        ]
-      }
-    ],
+    orderId: {
+      type: String,
+      required: true
+    },
     date: Date,
+    status: Number,
     price: Number,
     payment: Number,
-    userSettings: {
-      userId: String,
-      name: String,
-      tel: String,
-      bonusCount: String,
-      city: String,
-      street: String,
-      home: String,
-      flat: String,
-      stage: String,
-      gate: String,
-      code: String
-    }
+    products: [
+      {
+        type: Object
+      }
+    ],
+    userSettings: Object
   },
   { collection: 'userOrders' }
 );
