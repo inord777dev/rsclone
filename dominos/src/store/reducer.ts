@@ -7,6 +7,7 @@ const initialState: GlobalState = {
     email: '',
   },
   order: {
+    date: '',
     products: [],
     ingredients: [],
     price: 0,
@@ -48,6 +49,7 @@ const reducer = (
   if (action.type === actionTypes.ADD_PRODUCT) {
     const product = action.payload as IProduct;
     product.count = 1;
+    product.components = [];
     const predicateHas = (item : IProduct) => item.id === product.id;
     const predicatHasNot = (item: IProduct) => item.id !== product.id;
     return {

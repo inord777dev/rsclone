@@ -26,34 +26,36 @@ interface IPizza {
 
 interface IProduct extends IPizza {
   count: number = 0;
+  components: string[];
 }
 
 interface ICurrentUser {
-  id: string = ''
-  name : string = ''
-  email: string = ''
+  id: string;
+  name : string;
+  email: string;
 }
 
 interface IOrder {
-  products: IProduct[] = []
-  ingredients: string[] = []
-  userSettings: UserSettings
-  price: number = 0
+  date: string;
+  products: IProduct[];
+  ingredients: string[];
+  userSettings: UserSettings;
+  price: number;
 }
 
 interface UserSettings {
   [key: string]: string;
-  userId: string = ''
-  name: string = ''
-  tel: string = ''
-  bonusCount: string = ''
-  city: string = ''
-  street: string = ''
-  home: string = ''
-  flat: string = ''
-  stage: string = ''
-  gate: string = ''
-  code: string = ''
+  userId: string;
+  name: string;
+  tel: string;
+  bonusCount: string;
+  city: string;
+  street: string;
+  home: string;
+  flat: string;
+  stage: string;
+  gate: string;
+  code: string;
 }
 
 type GlobalState = {
