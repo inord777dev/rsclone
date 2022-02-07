@@ -70,7 +70,7 @@ type GlobalState = {
 
 type GlobalAction = {
   type: string
-  payload: IProduct | string | user | null
+  payload: IProduct | string | ICurrentUser | null
 };
 
 type DispatchType = (args: GlobalAction) => GlobalAction;
