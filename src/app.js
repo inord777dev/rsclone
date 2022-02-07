@@ -20,6 +20,7 @@ const userWordsRouter = require('./resources/userWords/userWord.router');
 const aggregatedWordsRouter = require('./resources/aggregatedWords/aggregatedWord.router');
 const statisticRouter = require('./resources/statistics/statistic.router');
 const userSettingsRouter = require('./resources/userSettings/userSettings.router');
+const userOrdersRouter = require('./resources/userOrders/userOrders.router');
 const errorHandler = require('./errors/errorHandler');
 const checkAuthentication = require('./resources/authentication/checkAuthentication');
 const { userIdValidator } = require('./utils/validation/validator');
@@ -71,6 +72,8 @@ userRouter.use('/:id/aggregatedWords', userIdValidator, aggregatedWordsRouter);
 userRouter.use('/:id/statistics', userIdValidator, statisticRouter);
 
 userRouter.use('/:id/settings', userIdValidator, userSettingsRouter);
+
+userRouter.use('/:id/orders', userIdValidator, userOrdersRouter);
 
 app.use((req, res, next) => next(createError(NOT_FOUND)));
 
