@@ -61,16 +61,17 @@ const reducer = (
     };
   }
   if (action.type === actionTypes.ADD_INGREDIENT) {
-    const payload = action.payload as string;
-    const predicateHas = (item : string) => item === payload;
-    const predicatHasNot = (item: string) => item !== payload;
-    return {
-      ...state,
-      order: {
-        ...state.order,
-        ingredients: stateUpdated(payload, state.order.ingredients, predicateHas, predicatHasNot),
-      },
-    };
+    // const payload = action.payload as string;
+    // const predicateHas = (item : string) => item === payload;
+    // const predicatHasNot = (item: string) => item !== payload;
+    // return {
+    //   ...state,
+    //   order: {
+    //     ...state.order,
+    //     ingredients:
+    // stateUpdated(payload, state.order.ingredients, predicateHas, predicatHasNot),
+    //   },
+    // };
   }
   return state;
 };
