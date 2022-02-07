@@ -35,12 +35,17 @@ interface ICurrentUser {
   email: string;
 }
 
+enum Payment {
+  Сash,
+  Card,
+}
+
 interface IOrder {
-  date: string;
   products: IProduct[];
-  ingredients: string[];
-  userSettings: UserSettings;
+  date: string;
   price: number;
+  userSettings: UserSettings;
+  payment: Payment;
 }
 
 interface UserSettings {

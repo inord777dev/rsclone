@@ -7,9 +7,8 @@ const initialState: GlobalState = {
     email: '',
   },
   order: {
-    date: '',
     products: [],
-    ingredients: [],
+    date: '',
     price: 0,
     userSettings: {
       userId: '',
@@ -24,6 +23,7 @@ const initialState: GlobalState = {
       gate: '',
       code: '',
     },
+    payment: Payment.Сash,
   },
 };
 
