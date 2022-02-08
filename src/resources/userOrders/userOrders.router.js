@@ -12,7 +12,7 @@ router.get('/', async (req, res) => {
 router.put('/:orderId', validator(userOrders, 'body'), async (req, res) => {
   const setting = await userOrdersService.upsert(
     req.userId,
-    req.orderId,
+    req.params.orderId,
     req.body
   );
   res.status(OK).send(setting.toResponse());
