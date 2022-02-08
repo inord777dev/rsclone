@@ -24,7 +24,16 @@
   flex: 1;
 
   &__context {
-    padding-top: 40px;
+    padding-top: 10px;
+  }
+
+  &__message {
+    color: rgba(0, 0, 0, 0.87);
+    font-size: 16px;
+    font-weight: 400;
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    line-height: 1.5em;
+    text-align: center;
   }
 
   &__item {
@@ -75,6 +84,7 @@
 .btnMenu {
   @extend %btn;
   background: #0079ae;
+  margin-top: 8px;
 }
 
 .user {

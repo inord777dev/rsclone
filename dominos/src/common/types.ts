@@ -33,6 +33,7 @@ export interface ICurrentUser {
 }
 
 export interface IOrder {
+  id: string;
   orderId: string;
   products: IProduct[];
   date: string;

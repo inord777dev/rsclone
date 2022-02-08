@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import CookieService from '../../services/CookieService';
 import style from './profile.module.scss';
 import Address from '../address/address';
+import History from './history/history';
 import { useOutletContex } from '../main/main';
 import { UserSettings, IOrder } from '../../common/types';
 
@@ -213,10 +214,7 @@ export default function Profile() {
             <div className={style.header__title}>История заказов</div>
           </div>
           <div className={style.history__context}>
-            <div className={style.history__item}>
-              { !orders.length ? 'Кажется, вы еще ничего не заказывали...'
-                : orders.map((order) => <div>{order.date}</div>)}
-            </div>
+            <History orders={orders} />
           </div>
           <Link to="/" className={style.btnMenu}>
             Посмотреть меню

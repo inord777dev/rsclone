@@ -5,7 +5,7 @@ import { Dispatch } from 'redux';
 import { useSelector, shallowEqual, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import { nanoid } from 'nanoid';
+import { customAlphabet } from 'nanoid';
 
 import CookieService from '../../services/CookieService';
 import style from './order.module.scss';
@@ -18,6 +18,8 @@ import {
 } from '../../common/types';
 
 export default function Order() {
+  const nanoid = customAlphabet('1234567890abcdefghijklmnopqrstuvwxyz', 12);
+
   const { currentUser } = useOutletContex();
 
   const order: IOrder = useSelector(
@@ -27,7 +29,7 @@ export default function Order() {
 
   const dispatch: Dispatch<any> = useDispatch();
 
-  const aclearProductsCallback = useCallback(
+  const clearProductsCallback = useCallback(
     () => dispatch(clearProducts()),
     [dispatch],
   );
@@ -51,6 +53,7 @@ export default function Order() {
   //   },
   // ];
 
+  const [meassage, setMeassage] = useState<string>('');
   const [userSettings, setUserSettings] = useState<UserSettings>({
     userId: '',
     name: '',
@@ -91,9 +94,13 @@ export default function Order() {
 
   async function userOrderSend() {
     const currentOrder = { ...order, userSettings };
+    currentOrder.orderId = nanoid();
     const now = new Date();
     currentOrder.date = now.toJSON();
-    currentOrder.orderId = nanoid();
+    currentOrder.price = currentOrder.products.reduce(
+      (acc, item) => acc + parseFloat(item.price),
+      0,
+    );
     await axios
       .put<IOrder>(
       `https://rs-clone-pizza-service.herokuapp.com/users/${currentUser.id}/orders/${currentOrder.orderId}`,
@@ -107,7 +114,8 @@ export default function Order() {
     )
       .then((response) => {
         if (response.status === 200) {
-          aclearProductsCallback();
+          clearProductsCallback();
+          setMeassage('Ваш заказ принят. Спасибо!');
         }
       });
   }
@@ -153,9 +161,9 @@ export default function Order() {
             <div className={style.header__title}>Ваш заказ</div>
           </div>
           <div className={style.history__context}>
-            { order.products.map((product) => (
+            { order.products.length ? order.products.map((product) => (
               <Product product={product} onDeleteProduct={onDeleteProduct} />
-            ))}
+            )) : (<div className={style.history__message}>{meassage}</div>)}
           </div>
         </div>
       </div>

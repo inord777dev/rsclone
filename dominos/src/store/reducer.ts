@@ -10,6 +10,7 @@ const initialState: GlobalState = {
     email: '',
   },
   order: {
+    id: '',
     orderId: '',
     products: [],
     date: '',
