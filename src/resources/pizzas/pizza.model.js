@@ -6,7 +6,7 @@ const PizzasSchema = new Schema(
   {
     key: String,
     name: String,
-    ingredients: String,
+    components: String,
     image: String,
     price: String,
     weith: String,
