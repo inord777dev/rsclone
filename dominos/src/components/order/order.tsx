@@ -12,7 +12,7 @@ import style from './order.module.scss';
 import Address from '../address/address';
 import { useOutletContex } from '../main/main';
 import Product from './product/product';
-import { addProduct, clearProducts } from '../../store/action';
+import { deleteProduct, clearProducts } from '../../store/action';
 import {
   GlobalState, IOrder, IProduct, UserSettings,
 } from '../../common/types';
@@ -35,7 +35,7 @@ export default function Order() {
   );
 
   const addPizzaCallback = useCallback(
-    (item: IProduct) => dispatch(addProduct(item)),
+    (item: IProduct) => dispatch(deleteProduct(item)),
     [dispatch],
   );
 

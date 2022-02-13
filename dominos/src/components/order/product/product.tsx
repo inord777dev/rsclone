@@ -20,7 +20,8 @@ export default function Product({ product, onDeleteProduct }: ProductProps) {
       </div>
       <div className={style.product__context}>
         <div className={style.product__title}>{`${product.name}`}</div>
-        <div className={style.product__text}>{`${product.ingredients}`}</div>
+        <div className={style.product__text}>{`${product.type}, ${product.hasMazarella ? 'Моцарелла, ' : ''} ${product.size}`}</div>
+        <div className={style.product__text}>{`${product.components}`}</div>
         <div className={style.product__footer}>
           <div className={style.product__footerLeft}>
             <div className={style.product__price}>{`${product.price}`}</div>

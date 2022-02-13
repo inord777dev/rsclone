@@ -1,11 +1,11 @@
 import {
-  GlobalAction, DispatchType, ICurrentUser, IProduct,
+  GlobalAction, DispatchType, ICurrentUser, IProduct, PizzaParams,
 } from '../common/types';
 
 export const INIT_USER = 'INIT_USER';
 export const CLEAR_PRODUCTS = 'CLEAR_PRODUCTS';
 export const ADD_PRODUCT = 'ADD_PRODUCT';
-export const ADD_INGREDIENT = 'ADD_INGREDIENT';
+export const DELETE_PRODUCT = 'DELETE_PRODUCT';
 
 export function onDispatch(action: GlobalAction) {
   return (dispatch: DispatchType) => {
@@ -29,7 +29,7 @@ export function clearProducts() {
   return onDispatch(action);
 }
 
-export function addProduct(payload: IProduct) {
+export function addProduct(payload: PizzaParams) {
   const action: GlobalAction = {
     type: ADD_PRODUCT,
     payload,
@@ -37,9 +37,9 @@ export function addProduct(payload: IProduct) {
   return onDispatch(action);
 }
 
-export function addIngredient(payload: string) {
+export function deleteProduct(payload: IProduct) {
   const action: GlobalAction = {
-    type: ADD_INGREDIENT,
+    type: DELETE_PRODUCT,
     payload,
   };
   return onDispatch(action);

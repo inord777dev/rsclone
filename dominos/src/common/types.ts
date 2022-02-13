@@ -14,7 +14,7 @@ export interface IPizza {
   id: string;
   key: string;
   name: string;
-  ingredients: string;
+  components: string;
   image: string;
   price: string;
   weith: string;
@@ -23,7 +23,11 @@ export interface IPizza {
 
 export interface IProduct extends IPizza {
   count: number;
-  components: string[];
+  size: string
+  type: string
+  price: string
+  hasHotDogBoard: boolean,
+  hasMazarella: boolean,
 }
 
 export interface ICurrentUser {
@@ -65,9 +69,18 @@ export type GlobalState = {
 
 export type GlobalAction = {
   type: string
-  payload: IProduct | string | ICurrentUser | null
+  payload: IProduct | string | ICurrentUser | null | PizzaParams
 };
 
 export type DispatchType = (args: GlobalAction) => GlobalAction;
 
 export type OutletContext = { pizzas: IPizza[], currentUser: ICurrentUser };
+
+export type PizzaParams = {
+  pizza: IPizza
+  size: string
+  type: string
+  price: string
+  hasHotDogBoard: boolean,
+  hasMazarella: boolean,
+};
