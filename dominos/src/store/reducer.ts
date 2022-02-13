@@ -101,6 +101,51 @@ const reducer = (
       },
     };
   }
+
+  const changeCount = (diff: number) => {
+    const product = action.payload as IProduct;
+    const products = state.order.products.map((item) => {
+      let { count } = item;
+      if (item === product && count + diff > 0) {
+        count += diff;
+      }
+      return {
+        ...item,
+        count,
+      };
+    });
+    return {
+      ...state,
+      order: {
+        ...state.order,
+        products,
+      },
+    };
+  };
+
+  if (action.type === actionTypes.PLUS_COUNT) {
+    return changeCount(1);
+  }
+
+  if (action.type === actionTypes.MINUS_COUNT) {
+    return changeCount(-1);
+  }
+
+  if (action.type === actionTypes.SET_COUNT) {
+    const product = action.payload as IProduct;
+    const products = state.order.products.map((item) => ({
+      ...item,
+      count: item.id === product.id && product.count > 0 ? product.count : item.count,
+    }));
+    return {
+      ...state,
+      order: {
+        ...state.order,
+        products,
+      },
+    };
+  }
+
   return state;
 };
 

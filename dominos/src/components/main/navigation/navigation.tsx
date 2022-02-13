@@ -15,7 +15,7 @@ export default function Navigation() {
 
   useEffect(() => {
     function priceUpdate() {
-      setPrice(products.reduce((acc, item) => acc + parseFloat(item.price), 0));
+      setPrice(products.reduce((acc, item) => acc + parseFloat(item.price) * item.count, 0));
     }
     priceUpdate();
   });

@@ -12,7 +12,9 @@ import style from './order.module.scss';
 import Address from '../address/address';
 import { useOutletContex } from '../main/main';
 import Product from './product/product';
-import { deleteProduct, clearProducts } from '../../store/action';
+import {
+  deleteProduct, clearProducts, plusCount, minusCount, setCount,
+} from '../../store/action';
 import {
   GlobalState, IOrder, IProduct, UserSettings,
 } from '../../common/types';
@@ -36,6 +38,21 @@ export default function Order() {
 
   const addPizzaCallback = useCallback(
     (item: IProduct) => dispatch(deleteProduct(item)),
+    [dispatch],
+  );
+
+  const onProductPlusOneCallback = useCallback(
+    (item: IProduct) => dispatch(plusCount(item)),
+    [dispatch],
+  );
+
+  const onProductMinusOneCallback = useCallback(
+    (item: IProduct) => dispatch(minusCount(item)),
+    [dispatch],
+  );
+
+  const onProductCountSetCallback = useCallback(
+    (item: IProduct) => dispatch(setCount(item)),
     [dispatch],
   );
 
@@ -128,8 +145,20 @@ export default function Order() {
     setUserSettings(settings);
   };
 
-  const onDeleteProduct = (product: IProduct) => {
+  const onProductDelete = (product: IProduct) => {
     addPizzaCallback(product);
+  };
+
+  const onProductPlusOne = (product: IProduct) => {
+    onProductPlusOneCallback(product);
+  };
+
+  const onProductMinusOne = (product: IProduct) => {
+    onProductMinusOneCallback(product);
+  };
+
+  const onProductCountSet = (product: IProduct) => {
+    onProductCountSetCallback(product);
   };
 
   return (
@@ -162,7 +191,14 @@ export default function Order() {
           </div>
           <div className={style.history__context}>
             { order.products.length ? order.products.map((product) => (
-              <Product product={product} onDeleteProduct={onDeleteProduct} />
+              <Product
+                key={product.id}
+                product={product}
+                onProductDelete={onProductDelete}
+                onProductPlusOne={onProductPlusOne}
+                onProductMinusOne={onProductMinusOne}
+                onProductCountSet={onProductCountSet}
+              />
             )) : (<div className={style.history__message}>{meassage}</div>)}
           </div>
         </div>
