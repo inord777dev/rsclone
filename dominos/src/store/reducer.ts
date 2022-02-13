@@ -13,6 +13,7 @@ const initialState: GlobalState = {
   order: {
     id: '',
     orderId: '',
+    userId: '',
     products: [],
     date: '',
     price: 0,

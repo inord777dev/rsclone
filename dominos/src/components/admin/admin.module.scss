@@ -14,13 +14,35 @@
     justify-content: center;
     gap: 20px;
   }
+
+  &__pages {
+    display: flex;
+    gap: 20px;
+  }
+
+  &__page {
+    font-family: Ubuntu,sans-serif;
+    font-size: 22px;
+    line-height: 24px;
+    color: #00537a;
+    font-weight: 400;
+    text-decoration: none;
+    border: none;
+    background-color: transparent;
+    position: relative;
+    cursor: pointer;
+  }
+
+  &__page[data-visible="true"] {
+    border-bottom: 3px #e31837 solid;
+  }
  }
 
 .main {
   flex: 2;
 }
 
-.history {
+.statistics {
   flex: 1;
 
   &__context {
@@ -62,19 +84,6 @@
   }
 }
 
-.linkExit {
-  font-family: Ubuntu,sans-serif;
-  font-size: 16px;
-  line-height: 18px;
-  color: #00537a;
-  font-weight: 400;
-  text-decoration: none;
-
-  position: relative;
-  padding-left: 8px;
-  margin-left: 16px;
-}
-
 .btnSave {
   @extend %btn;
   background: #e31837;
@@ -87,7 +96,8 @@
   margin-top: 8px;
 }
 
-.user {
+.order,
+.users {
   @extend %profileGroup;
 
   &__title {
@@ -97,6 +107,79 @@
   &__content {
     @extend %profileGroup__content;
   }
+
+  table {
+    width: 100%;
+  }
+
+  th {
+    font-family: Ubuntu,sans-serif;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 21px;
+    color: #252a2c;
+
+    padding: 4px 10px 4px 10px;
+    text-align: left;
+
+    cursor: pointer;
+    background-color: #b6b6b6;
+  }
+
+  tr {
+    border: 1px rgb(188, 188, 188) solid;
+    margin-top: 20px
+  }
+
+  tr:nth-child(2n + 1) {
+    background-color: #f7f5f5;
+  }
+
+  td {
+    font-family: Ubuntu,sans-serif;
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 300;
+    color: #5a5a5a;
+    padding: 4px 10px 4px 10px;
+
+    text-align: left;
+  }
+
+  &__status {
+    width: 100%;
+    height: 25px;
+
+    text-transform: uppercase;
+
+    border: none;
+    cursor: pointer;
+  }
+
+  &__status[data-status="Created"] {
+    color: hsl(66, 100%, 61%) !important;
+    background-color: #fc2727ee;
+  }
+
+  &__status[data-status="Processed"] {
+    color: hsl(0, 54%, 30%) !important;
+    background-color: #ff7300;
+  }
+
+  &__status[data-status="Delivery"] {
+    color: hsl(86, 94%, 25%) !important;
+    background-color: #fffb00;
+  }
+
+  &__status[data-status="Completed"] {
+    color: #dcf30d !important;
+    background-color: #29ad29;
+  }
+}
+
+.order[data-visible="false"],
+.users[data-visible="false"] {
+  display: none;
 }
 
 .bonus {
