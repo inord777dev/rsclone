@@ -1,0 +1,155 @@
+@import '../../common/styles.scss';
+
+.profile {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 0 20px 0 20px;
+  background-color: rgb(247, 252, 255);
+  padding: 20px;
+
+  &__wrap {
+    width: 1350px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+  }
+ }
+
+.main {
+  flex: 2;
+}
+
+.history {
+  flex: 1;
+
+  &__context {
+    padding-top: 10px;
+  }
+
+  &__message {
+    color: rgba(0, 0, 0, 0.87);
+    font-size: 16px;
+    font-weight: 400;
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    line-height: 1.5em;
+    text-align: center;
+  }
+
+  &__item {
+    color: rgba(0, 0, 0, 0.87);
+    font-size: 16px;
+    font-weight: 400;
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    line-height: 1.5em;
+    text-align: center;
+  }
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+
+  &__title {
+    font-family: Ubuntu,sans-serif;
+    font-size: 36px;
+    font-weight: 400;
+    color: inherit;
+    margin-top: 0;
+    margin-bottom: 0;
+    color: #00537a;
+  }
+}
+
+.linkExit {
+  font-family: Ubuntu,sans-serif;
+  font-size: 16px;
+  line-height: 18px;
+  color: #00537a;
+  font-weight: 400;
+  text-decoration: none;
+
+  position: relative;
+  padding-left: 8px;
+  margin-left: 16px;
+}
+
+.btnSave {
+  @extend %btn;
+  background: #e31837;
+  color: #fff;
+}
+
+.btnMenu {
+  @extend %btn;
+  background: #0079ae;
+  margin-top: 8px;
+}
+
+.user {
+  @extend %profileGroup;
+
+  &__title {
+    @extend %profileGroup__title;
+  }
+
+  &__content {
+    @extend %profileGroup__content;
+  }
+}
+
+.bonus {
+  @extend %profileGroup;
+
+  &__title {
+    @extend %profileGroup__title;
+  }
+
+  &__content {
+    @extend %profileGroup__content;
+  }
+
+  &__icon {
+    width: 16px;
+    height: 16px;
+    color: #00537a;
+  }
+
+  &__text {
+    font-size: 16px;
+    margin: 16px 16px 16px 0;
+    padding: 4px 0;
+    line-height: 27px;
+    font-family: Ubuntu,sans-serif;
+    font-size: 18px;
+    color: #43525a;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+   }
+
+   &__date {
+     margin: 0 16px 0 16px;
+   }
+
+   &__count{
+    margin: 16px 0 16px 16px;
+    padding: 4px 0;
+    font-family: Ubuntu,sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+    color: #00537a;
+    white-space: nowrap;
+   }
+
+   &__mark {
+    color: #00537a;
+   }
+
+}
+
+.save {
+  @extend %profileGroup;
+}
+
+

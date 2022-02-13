@@ -1,21 +1,13 @@
 import React from 'react';
 import { IOrder } from '../../../common/types';
 import style from './history.module.scss';
+import DataService from '../../../services/DateService';
 
 type HistoryProps = {
   orders: IOrder[];
 };
 
 export default function OrderAbout({ orders }: HistoryProps) {
-  const options: Intl.DateTimeFormatOptions = {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-    hour: 'numeric',
-    minute: 'numeric',
-    second: 'numeric',
-  };
-
   return (
     <div className={style.orderAbout}>
       { orders.length
@@ -34,7 +26,9 @@ export default function OrderAbout({ orders }: HistoryProps) {
               <div className={style.history__context}>
                 <div className={style.history__header}>
                   <div className={style.history__title}>{`Заказ № ${id}`}</div>
-                  <div className={style.history__text}>{new Date(order.date).toLocaleString('ru', options)}</div>
+                  <div className={style.history__text}>
+                    {DataService.localString(order.date)}
+                  </div>
                 </div>
                 <div className={style.history__footer}>
                   <div className={style.history__price}>{`${order.price} руб.`}</div>

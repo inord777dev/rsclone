@@ -13,13 +13,13 @@ import CookieService from '../../services/CookieService';
 import Infographic from './infographic/infographic';
 import Footer from './footer/footer';
 import { initUser } from '../../store/action';
-import * as types from '../../common/types';
+import { IPizza, ICurrentUser, OutletContext } from '../../common/types';
 
 export default function Main() {
   const navigate = useNavigate();
-  const [pizzas, setPizzas] = useState<types.IPizza[]>([]);
+  const [pizzas, setPizzas] = useState<IPizza[]>([]);
   const [loginVisible, loginVisibleSet] = useState(false);
-  const [currentUser, setCurrentUser] = useState<types.ICurrentUser>({
+  const [currentUser, setCurrentUser] = useState<ICurrentUser>({
     id: '',
     name: '',
     email: '',
@@ -28,18 +28,18 @@ export default function Main() {
   const dispatch: Dispatch<any> = useDispatch();
 
   const initUserCallback = useCallback(
-    (user: types.ICurrentUser) => dispatch(initUser(user)),
+    (user: ICurrentUser) => dispatch(initUser(user)),
     [dispatch],
   );
 
-  const onCurrentUserSet = (user: types.ICurrentUser) => {
+  const onCurrentUserSet = (user: ICurrentUser) => {
     setCurrentUser(user);
   };
 
   useEffect(() => {
     async function fetchData() {
       await axios
-        .get<types.IPizza[]>('https://rs-clone-pizza-service.herokuapp.com/pizzas')
+        .get<IPizza[]>('https://rs-clone-pizza-service.herokuapp.com/pizzas')
         .then((response) => {
           setPizzas(response?.data);
         });
@@ -49,7 +49,7 @@ export default function Main() {
       .catch(() => {});
     const localStorageUser = localStorage.getItem('currentUser');
     if (localStorageUser !== null) {
-      const user = JSON.parse(localStorageUser) as types.ICurrentUser;
+      const user = JSON.parse(localStorageUser) as ICurrentUser;
       const userId = CookieService.getUserId();
       if (userId !== undefined) {
         user.id = CookieService.getUserId();
@@ -89,9 +89,9 @@ export default function Main() {
 }
 
 export function usePizzas() {
-  return useOutletContext<types.IPizza[]>();
+  return useOutletContext<IPizza[]>();
 }
 
 export function useOutletContex() {
-  return useOutletContext<types.OutletContext>();
+  return useOutletContext<OutletContext>();
 }
