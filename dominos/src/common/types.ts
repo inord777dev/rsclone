@@ -1,13 +1,13 @@
 export enum Payment {
-  Сash,
-  Card,
+  Сash = 'Cash',
+  Card = 'Card',
 }
 
 export enum OrderStatus {
-  Created,
-  Processed,
-  Delivery,
-  Completed,
+  Created = 'Created',
+  Processed = 'Processed',
+  Delivery = 'Delivery',
+  Completed = 'Completed',
 }
 
 export interface IPizza {

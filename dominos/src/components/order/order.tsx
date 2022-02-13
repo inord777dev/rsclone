@@ -16,7 +16,7 @@ import {
   deleteProduct, clearProducts, plusCount, minusCount, setCount,
 } from '../../store/action';
 import {
-  GlobalState, IOrder, IProduct, UserSettings,
+  GlobalState, IOrder, IProduct, UserSettings, Payment,
 } from '../../common/types';
 
 export default function Order() {
@@ -70,7 +70,8 @@ export default function Order() {
   //   },
   // ];
 
-  const [meassage, setMeassage] = useState<string>('');
+  const [meassage, setMeassage] = useState('');
+  const [payment, setPayment] = useState(Payment.Сash);
   const [userSettings, setUserSettings] = useState<UserSettings>({
     userId: '',
     name: '',
@@ -118,6 +119,7 @@ export default function Order() {
       (acc, item) => acc + parseFloat(item.price),
       0,
     );
+    currentOrder.payment = payment;
     await axios
       .put<IOrder>(
       `https://rs-clone-pizza-service.herokuapp.com/users/${currentUser.id}/orders/${currentOrder.orderId}`,
@@ -161,6 +163,10 @@ export default function Order() {
     onProductCountSetCallback(product);
   };
 
+  const onChangePayment = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setPayment(e.target.value as Payment);
+  };
+
   return (
     <div className={style.profile}>
       <div className={style.profile__wrap}>
@@ -172,6 +178,13 @@ export default function Order() {
                 Выйти
               </Link>
             </div>
+          </div>
+          <div className={style.payment}>
+            <div className={style.payment__title}>Способ оплаты</div>
+            <select name="paymentType" className={style.payment__select_container} id="paymentType" value={payment} onChange={onChangePayment}>
+              <option value="Cash">Наличные</option>
+              <option value="Card">Банковкая карта</option>
+            </select>
           </div>
           <Address userSettings={userSettings} onChangeUserSettings={onChangeUserSettings} />
           <div className={style.save}>
