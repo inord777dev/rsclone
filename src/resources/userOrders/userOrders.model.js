@@ -13,9 +13,9 @@ const UserOrdersSchema = new Schema(
       required: true
     },
     date: Date,
-    status: Number,
+    status: String,
     price: Number,
-    payment: Number,
+    payment: String,
     products: [
       {
         type: Object
