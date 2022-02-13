@@ -1,22 +1,14 @@
-const Statistics = require('./statistic.model');
-const { NOT_FOUND_ERROR } = require('../../errors/appErrors');
+const UserOrders = require('../userOrders/userOrders.model');
 
-const get = async userId => {
-  const statistic = await Statistics.findOne({ userId });
-  if (!statistic) {
-    throw new NOT_FOUND_ERROR('statistic', `userId: ${userId}`);
+const getOrders = async () => {
+  const start = new Date();
+  start.setFullYear(start.getFullYear() - 1);
+
+  function filter() {
+    return this.date >= start;
   }
 
-  return statistic;
+  return await UserOrders.$where(filter);
 };
 
-const upsert = async (userId, statistic) =>
-  Statistics.findOneAndUpdate(
-    { userId },
-    { $set: statistic },
-    { upsert: true, new: true }
-  );
-
-const remove = async userId => Statistics.deleteOne({ userId });
-
-module.exports = { get, upsert, remove };
+module.exports = { getOrders };

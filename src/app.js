@@ -11,16 +11,13 @@ require('express-async-errors');
 const { NOT_FOUND } = require('http-status-codes');
 
 const winston = require('./common/logging');
-const wordRouter = require('./resources/words/word.router');
 const pizzaRouter = require('./resources/pizzas/pizza.router');
 const signinRouter = require('./resources/authentication/signin.router');
 const userRouter = require('./resources/users/user.router');
 const userTokenRouter = require('./resources/token/token.router');
-const userWordsRouter = require('./resources/userWords/userWord.router');
-const aggregatedWordsRouter = require('./resources/aggregatedWords/aggregatedWord.router');
-const statisticRouter = require('./resources/statistics/statistic.router');
 const userSettingsRouter = require('./resources/userSettings/userSettings.router');
 const userOrdersRouter = require('./resources/userOrders/userOrders.router');
+const statisticsRouter = require('./resources/statistics/statistic.router');
 const errorHandler = require('./errors/errorHandler');
 const checkAuthentication = require('./resources/authentication/checkAuthentication');
 const { userIdValidator } = require('./utils/validation/validator');
@@ -55,21 +52,15 @@ app.use(
   )
 );
 
-app.use('/words', wordRouter);
-
 app.use('/pizzas', pizzaRouter);
 
 app.use('/signin', signinRouter);
 
 app.use('/users', userRouter);
 
+app.use('/statistics', statisticsRouter);
+
 userRouter.use('/:id/tokens', userIdValidator, userTokenRouter);
-
-userRouter.use('/:id/words', userIdValidator, userWordsRouter);
-
-userRouter.use('/:id/aggregatedWords', userIdValidator, aggregatedWordsRouter);
-
-userRouter.use('/:id/statistics', userIdValidator, statisticRouter);
 
 userRouter.use('/:id/settings', userIdValidator, userSettingsRouter);
 
