@@ -18,7 +18,11 @@ const User = new Schema(
       minlength: 8
     }
   },
-  { collection: 'users' }
+  {
+    collection: 'users',
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true }
+  }
 );
 
 User.virtual('settings', {
