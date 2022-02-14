@@ -8,6 +8,11 @@ const {
   userIdValidator
 } = require('../../utils/validation/validator');
 
+router.get('/', async (req, res) => {
+  const users = await userService.getAllSettings();
+  res.status(OK).send(users.map(u => u.toResponse()));
+});
+
 router.post('/', validator(user, 'body'), async (req, res) => {
   const userEntity = await userService.save(req.body);
   res.status(OK).send(userEntity.toResponse());

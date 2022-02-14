@@ -12,6 +12,14 @@ const getUserByEmail = async email => {
   return user;
 };
 
+const getAllSettings = async () => {
+  const users = await User.find({}).populate({
+    path: 'settings',
+    select: 'userId'
+  });
+  return users;
+};
+
 const get = async id => {
   const user = await User.findOne({ _id: id });
   if (!user) {
@@ -38,4 +46,4 @@ const update = async (id, user) =>
 
 const remove = async id => User.deleteOne({ _id: id });
 
-module.exports = { get, getUserByEmail, save, update, remove };
+module.exports = { get, getUserByEmail, getAllSettings, save, update, remove };

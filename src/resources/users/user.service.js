@@ -2,8 +2,7 @@ const bcrypt = require('bcrypt');
 
 const usersRepo = require('./user.db.repository');
 const tokenService = require('../token/token.service');
-const settingsService = require('../settings/setting.service');
-const statisticService = require('../statistics/statistic.service');
+const userSettingsService = require('../userSettings/userSettings.service');
 const { AUTHENTICATION_ERROR } = require('../../errors/appErrors');
 
 const authenticate = async user => {
@@ -19,6 +18,8 @@ const authenticate = async user => {
   return { ...tokens, userId: userEntity._id, name: userEntity.name };
 };
 
+const getAllSettings = () => usersRepo.getAllSettings();
+
 const get = id => usersRepo.get(id);
 
 const save = user => usersRepo.save(user);
@@ -26,9 +27,8 @@ const save = user => usersRepo.save(user);
 const update = (id, user) => usersRepo.update(id, user);
 
 const remove = async id => {
-  await statisticService.remove(id);
-  await settingsService.remove(id);
+  await userSettingsService.remove(id);
   await usersRepo.remove(id);
 };
 
-module.exports = { authenticate, get, save, update, remove };
+module.exports = { authenticate, get, getAllSettings, save, update, remove };

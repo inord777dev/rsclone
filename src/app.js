@@ -29,8 +29,6 @@ app.use(helmet());
 app.use(cors());
 app.use(express.json());
 
-app.use('/files', express.static(path.join(__dirname, '../files')));
-
 app.use(checkAuthentication);
 
 app.use('/doc', swaggerUI.serve, swaggerUI.setup(swaggerDocument));
