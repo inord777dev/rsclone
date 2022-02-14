@@ -13,20 +13,7 @@ const getUserByEmail = async email => {
 };
 
 const getAllSettings = async () => {
-  // const users = User.aggregate([
-  //   {
-  //     $lookup: {
-  //       from: 'settings',
-  //       localField: '_id',
-  //       foreignField: 'userId',
-  //       as: 'settings'
-  //     }
-  //   }
-  // ]);
-  const users = await User.find().populate({
-    path: 'settings',
-    select: 'userId'
-  });
+  const users = await User.find().populate('settings');
   return users;
 };
 

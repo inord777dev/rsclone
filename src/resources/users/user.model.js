@@ -16,14 +16,17 @@ const User = new Schema(
       required: true,
       trim: true,
       minlength: 8
-    },
-    settings: {
-      type: Schema.Types.ObjectId,
-      ref: 'UserSettings'
     }
   },
   { collection: 'users' }
 );
+
+User.virtual('settings', {
+  ref: 'UserSettings',
+  localField: '_id',
+  foreignField: 'userId',
+  justOne: true
+});
 
 User.pre('save', async function preSave(next) {
   this.password = await bcrypt.hash(this.password, 10);
