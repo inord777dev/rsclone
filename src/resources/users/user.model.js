@@ -18,7 +18,7 @@ const User = new Schema(
       minlength: 8
     },
     settings: {
-      type: String,
+      type: Schema.Types.ObjectId,
       ref: 'UserSettings'
     }
   },
