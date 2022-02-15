@@ -19,6 +19,7 @@ import Footer from './footer/footer';
 
 export default function Main() {
   const [pizzas, setPizzas] = useState<IPizza[]>([]);
+  const [sortType, setSortType] = useState('');
   const [loginVisible, loginVisibleSet] = useState(false);
   const [profileVisible, profileVisibleSet] = useState(false);
   const [currentUser, setCurrentUser] = useState<ICurrentUser>({
@@ -69,6 +70,25 @@ export default function Main() {
     profileVisibleSet(false);
   };
 
+  const sortingType = (sortTypeString:React.MouseEvent):void => {
+    const target = sortTypeString.target as Element;
+    setSortType(target.id);
+    if (sortType === 'name') {
+      target.id = 'reverseName';
+      setPizzas([...pizzas.sort((a, b) => a.name.localeCompare(b.name))]);
+    } else if (sortType === 'reverseName') {
+      target.id = 'name';
+      setPizzas([...pizzas.sort((a, b) => b.name.localeCompare(a.name))]);
+    }
+    if (sortType === 'price') {
+      target.id = 'reversePrice';
+      setPizzas([...pizzas.sort((a, b) => parseFloat(a.price) - parseFloat(b.price))]);
+    } else if (sortType === 'reversePrice') {
+      target.id = 'price';
+      setPizzas([...pizzas.sort((a, b) => parseFloat(b.price) - parseFloat(a.price))]);
+    }
+  };
+
   return profileVisible ? (
     <div className={style.wrapper}>
       <Header onLoginShow={onLoginShow} currentUser={currentUser} />
@@ -81,7 +101,9 @@ export default function Main() {
       <Navigation />
       <Carusel />
       <CaruselTwo />
-      <PizzaCatalog />
+      <PizzaCatalog
+        onClick={sortingType}
+      />
       <div className={style.container_pizza}>
         {pizzas.map((item: IPizza) => (
           <PizzaCard pizza={item} />

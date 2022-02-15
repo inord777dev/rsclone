@@ -1,7 +1,13 @@
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from 'react';
 import style from './pizzaCatalog.module.scss';
 
-export default function PizzaCatalog() {
+type PropsSort = {
+  onClick: (a:React.MouseEvent) => void
+};
+
+export default function PizzaCatalog({ onClick }:PropsSort) {
   return (
     <div className={style.container_catalog}>
       <div className={style.pizza}>
@@ -17,9 +23,12 @@ export default function PizzaCatalog() {
       </div>
       <div className={style.sort}>
         Сортировка по:
-        <ul className={style.type_sort}>
-          <li>популярности</li>
-          <li>категориям</li>
+        <ul
+          className={style.type_sort}
+          onClick={(event) => onClick(event)}
+        >
+          <li id="name">по названию</li>
+          <li id="price">по цене</li>
         </ul>
       </div>
     </div>
