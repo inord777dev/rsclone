@@ -34,6 +34,7 @@ export interface ICurrentUser {
   id: string;
   name : string;
   email: string;
+  settings: UserSettings
 }
 
 export interface IOrder {

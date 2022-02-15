@@ -40,7 +40,26 @@ export default function Admin() {
           }
         });
     }
+    async function getUsers() {
+      await axios
+        .get<ICurrentUser[]>(
+        'https://rs-clone-pizza-service.herokuapp.com/users',
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        },
+      )
+        .then((response) => {
+          if (response.status === 200) {
+            setUsers(response?.data);
+          }
+        });
+    }
     getOrders()
+      .then(() => {})
+      .catch(() => {});
+    getUsers()
       .then(() => {})
       .catch(() => {});
   }, [token]);
@@ -169,6 +188,7 @@ export default function Admin() {
                   <th>ID</th>
                   <th>Электронная почта</th>
                   <th>Роль</th>
+                  <th>Действия</th>
                 </tr>
               </thead>
               <tbody>
@@ -176,6 +196,19 @@ export default function Admin() {
                   <tr key={user.id}>
                     <td>{user.id}</td>
                     <td>{user.email}</td>
+                    <td>
+                      <select value={user.settings?.role}>
+                        <option value="admin">Администратор</option>
+                        <option value="user">Пользователь</option>
+                      </select>
+                    </td>
+                    <td>
+                      <button
+                        type="button"
+                      >
+                        Удалить
+                      </button>
+                    </td>
                   </tr>
                 ))}
               </tbody>

@@ -1,6 +1,6 @@
 import {
   GlobalState, OrderStatus, Payment, GlobalAction, ICurrentUser, IProduct,
-  PizzaParams,
+  PizzaParams, UserSettings,
 } from '../common/types';
 import * as actionTypes from './action';
 
@@ -9,6 +9,7 @@ const initialState: GlobalState = {
     id: '',
     name: '',
     email: '',
+    settings: {} as UserSettings,
   },
   order: {
     id: '',
