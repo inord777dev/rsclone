@@ -41,7 +41,8 @@ const save = async user => {
       flat: '',
       stage: '',
       gate: '',
-      code: ''
+      code: '',
+      role: 'user'
     });
     return createdUser;
   } catch (err) {
