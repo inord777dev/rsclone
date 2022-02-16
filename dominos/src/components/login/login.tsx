@@ -126,20 +126,12 @@ export default function Login({
               <button className={style.login__btn} type="button" onClick={onEnter}>
                 Boйти
               </button>
-              {/* <div>
-                <a
-                  className={style.login__formEditLink}
-                  href="/"
-                >
-                  Забыли пароль?
-                </a>
-              </div> */}
               <div>
                 <a
                   className={style.login__formEditLink}
                   href="/"
                 >
-                  Зарегистрироваться?
+                  Создать
                 </a>
               </div>
             </div>
