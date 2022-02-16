@@ -46,6 +46,11 @@ class CookieService {
   isLogin() : boolean {
     return this.getUserId() !== undefined && this.getToken() !== undefined;
   }
+
+  clear(): void {
+    this.cookie.remove(this.keyToken);
+    this.cookie.remove(this.keyUserId);
+  }
 }
 
 export default new CookieService();

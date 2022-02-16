@@ -197,7 +197,7 @@ export default function Admin() {
                     <td>{user.id}</td>
                     <td>{user.email}</td>
                     <td>
-                      <select value={user.settings?.role}>
+                      <select value={user.settings?.role} disabled={user.email === 'sa@dominos.by'}>
                         <option value="admin">Администратор</option>
                         <option value="user">Пользователь</option>
                       </select>
@@ -205,6 +205,7 @@ export default function Admin() {
                     <td>
                       <button
                         type="button"
+                        disabled={user.email === 'sa@dominos.by'}
                       >
                         Удалить
                       </button>

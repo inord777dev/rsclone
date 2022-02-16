@@ -13,7 +13,13 @@ type LoginProps = {
   onCurrentUserSet: (user: ICurrentUser) => void
 };
 
-type ReqData = {
+type SigninReqData = {
+  email: string,
+  password: string,
+};
+
+type CreateReqData = {
+  name: string,
   email: string,
   password: string,
 };
@@ -30,6 +36,7 @@ export default function Login({
 }: LoginProps) {
   const navigate = useNavigate();
   const [password, setPassword] = useState('');
+  const [meassage, setMessage] = useState('');
 
   const onPasswordChaned = (e: React.FormEvent<HTMLInputElement>) => {
     setPassword((e.target as HTMLInputElement).value);
@@ -42,11 +49,12 @@ export default function Login({
   };
 
   async function Signin() {
-    const reqData:ReqData = {
+    const reqData:SigninReqData = {
       email: currentUser.email,
       password,
     };
 
+    setMessage('');
     await axios
       .post('https://rs-clone-pizza-service.herokuapp.com/signin', JSON.stringify(reqData), {
         headers: {
@@ -65,12 +73,42 @@ export default function Login({
           onLoginClose();
           navigate('/');
         }
-      }).catch(() => {
+      }).catch((error: Error) => {
+        setMessage(error.message);
       });
   }
 
   const onEnter = () => {
     Signin()
+      .then(() => {})
+      .catch(() => {});
+  };
+
+  async function Create() {
+    const reqData:CreateReqData = {
+      name: currentUser.email,
+      email: currentUser.email,
+      password,
+    };
+
+    setMessage('');
+    await axios
+      .post('https://rs-clone-pizza-service.herokuapp.com/users', JSON.stringify(reqData), {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+      .then((response) => {
+        if (response.status === 200) {
+          onEnter();
+        }
+      }).catch((error: Error) => {
+        setMessage(error.message);
+      });
+  }
+
+  const onCreate = () => {
+    Create()
       .then(() => {})
       .catch(() => {});
   };
@@ -126,14 +164,10 @@ export default function Login({
               <button className={style.login__btn} type="button" onClick={onEnter}>
                 Boйти
               </button>
-              <div>
-                <a
-                  className={style.login__formEditLink}
-                  href="/"
-                >
-                  Создать
-                </a>
-              </div>
+              <button className={style.login__btnCreate} type="button" onClick={onCreate}>
+                Создать
+              </button>
+              <div>{meassage}</div>
             </div>
           </div>
         </div>

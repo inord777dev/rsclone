@@ -104,6 +104,11 @@ export default function Profile() {
     setUserSettings(settings);
   };
 
+  const onSignout = () => {
+    localStorage.removeItem('currentUser');
+    CookieService.clear();
+  };
+
   return (
     <div className={style.profile}>
       <div className={style.profile__wrap}>
@@ -111,7 +116,7 @@ export default function Profile() {
           <div className={style.header}>
             <div className={style.header__title}>Профиль</div>
             <div>
-              <a className={style.linkExit} href="/">
+              <a className={style.linkExit} href="/" onClick={onSignout}>
                 Выйти
               </a>
             </div>
