@@ -1,4 +1,4 @@
-@import '../../style/style.scss';
+@import '../../common/styles.scss';
 
 .profile {
   width: 100%;
@@ -27,7 +27,7 @@
     margin-top: 16px;
   }
 
-  &__item {
+  &__message {
     color: rgba(0, 0, 0, 0.87);
     font-size: 16px;
     font-weight: 400;
@@ -70,6 +70,12 @@
   @extend %btn;
   background: #e31837;
   color: #fff;
+}
+
+.btnSave:disabled {
+  @extend %btn;
+  opacity: .5;
+  cursor: not-allowed;
 }
 
 .btnMenu {
@@ -140,6 +146,26 @@
 
 .save {
   @extend %profileGroup;
+}
+
+.payment {
+  @extend %profileGroup;
+
+  &__title {
+    @extend %profileGroup__title;
+  }
+
+  &__content {
+    @extend %profileGroup__content;
+  }
+
+  &__select_container {
+    width: 100%;
+    height: 3.5rem;
+    border: 0.1rem solid rgba($color: grey, $alpha: 0.5);
+    border-radius: 9px;
+    margin-top: 8px;
+  }
 }
 
 

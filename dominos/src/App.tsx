@@ -6,6 +6,7 @@ import Main from './components/main/main';
 import Home from './components/main/home/home';
 import Profile from './components/profile/profile';
 import Order from './components/order/order';
+import Admin from './components/admin/admin';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Route index element={<Home />} />
           <Route path="user" element={<Profile />} />
           <Route path="user/order" element={<Order />} />
+          <Route path="admin" element={<Admin />} />
         </Route>
       </Routes>
     </div>

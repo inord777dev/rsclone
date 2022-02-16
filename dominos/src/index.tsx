@@ -8,6 +8,7 @@ import thunk from 'redux-thunk';
 import './index.css';
 import App from './App';
 import reducer from './store/reducer';
+import { GlobalState, GlobalAction, DispatchType } from './common/types';
 
 const store: Store<GlobalState, GlobalAction> & {
   dispatch: DispatchType

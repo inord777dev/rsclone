@@ -4,6 +4,7 @@ import axios from 'axios';
 
 import style from './login.module.scss';
 import CookieService from '../../services/CookieService';
+import { ICurrentUser } from '../../common/types';
 
 type LoginProps = {
   loginVisible: boolean,

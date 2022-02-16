@@ -13,6 +13,9 @@ import CookieService from '../../services/CookieService';
 import Infographic from './infographic/infographic';
 import Footer from './footer/footer';
 import { initUser } from '../../store/action';
+import {
+  IPizza, ICurrentUser, OutletContext, UserSettings,
+} from '../../common/types';
 
 export default function Main() {
   const navigate = useNavigate();
@@ -22,6 +25,7 @@ export default function Main() {
     id: '',
     name: '',
     email: '',
+    settings: {} as UserSettings,
   });
 
   const dispatch: Dispatch<any> = useDispatch();
