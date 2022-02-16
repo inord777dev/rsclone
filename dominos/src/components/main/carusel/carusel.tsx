@@ -24,7 +24,7 @@ export default function Carusel() {
         width={4300}
         loop
         autoplay={{
-          delay: 1000,
+          delay: 5000,
           disableOnInteraction: false,
         }}
         centeredSlides
