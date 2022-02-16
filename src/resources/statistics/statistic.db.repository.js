@@ -3,7 +3,7 @@ const UserOrders = require('../userOrders/userOrders.model');
 const getOrders = async () => {
   const now = new Date();
   const start = new Date();
-  start.setFullYear(start.getFullYear() - 1);
+  start.setFullYear(start.getFullYear() - 1, 0, 1);
   return await UserOrders.find({ date: { $gt: start, $lt: now } });
 };
 
