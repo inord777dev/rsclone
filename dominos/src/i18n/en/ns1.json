@@ -1,0 +1,20 @@
+{
+  "language": {
+    "en": "English",
+    "ru": "Russian"
+  },
+  "sity": {
+    "Minsk": "Minsk",
+    "Brest": "Brest",
+    "Soligorsk": "Soligorsk",
+    "Vitebsk": "Vitebsk",
+    "Baranovichi": "Baranovichi",
+    "Mogilev": "Mogilev",
+    "Grogno": "Grogno",
+    "Bobruisk": "Bobruisk"
+  },
+  "login": "Login",
+  "profile": "Profile",
+  "30minut": "30 minutes delivery",
+  "more": "More"
+}

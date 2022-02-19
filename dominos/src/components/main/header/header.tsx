@@ -1,15 +1,28 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-import React from 'react';
+import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
+
 import style from './header.module.scss';
 import companyLogo from '../../../assets/front/logo_header.png';
 import { ICurrentUser } from '../../../common/types';
 
 type HeaderProps = {
-  currentUser: ICurrentUser;
+  currentUser: ICurrentUser
   onLoginShow: () => void
+  changeLanguage: (language:string) => void
 };
 
-export default function Header({ onLoginShow, currentUser }:HeaderProps) {
+export default function Header({ onLoginShow, currentUser, changeLanguage }:HeaderProps) {
+  const { t } = useTranslation();
+
+  const [lang, setLang] = useState('ru');
+
+  const onChangeLang = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const target = e.target as HTMLSelectElement;
+    changeLanguage(target.value);
+    setLang(target.value);
+  };
+
   return (
     <div className={style.content_header_bg}>
       <div className={style.content_header}>
@@ -20,9 +33,9 @@ export default function Header({ onLoginShow, currentUser }:HeaderProps) {
           <svg width="22" height="22" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="#e31837"><g><path d="m14.01512,0.75l-4.27794,0c-0.58821,0 -1.06947,0.48126 -1.06947,1.06947c0,0.58821 0.48126,1.06947 1.06947,1.06947l4.27794,0c0.58821,0 1.06947,-0.48126 1.06947,-1.06947c0,-0.58821 -0.48126,-1.06947 -1.06947,-1.06947zm-2.139,13.90306c0.58821,0 1.06947,-0.48126 1.06947,-1.06947l0,-4.27786c0,-0.58821 -0.48126,-1.06947 -1.06947,-1.06947c-0.58821,0 -1.06947,0.48126 -1.06947,1.06947l0,4.27786c0,0.58821 0.48126,1.06947 1.06947,1.06947zm7.51842,-7.06917l0.8021,-0.8021c0.4064,-0.4064 0.41709,-1.08016 0,-1.49725l-0.01069,-0.01069c-0.41709,-0.41709 -1.08016,-0.4064 -1.49725,0l-0.8021,0.8021c-1.65767,-1.32614 -3.74313,-2.11754 -6.01047,-2.11754c-5.13344,0 -9.49686,4.23509 -9.62519,9.36852c-0.13903,5.43289 4.2137,9.88187 9.62519,9.88187c5.32601,0 9.62527,-4.30995 9.62527,-9.62519c0,-2.26727 -0.7914,-4.35273 -2.10685,-5.9997zm-7.51842,13.48597c-4.13883,0 -7.48626,-3.34743 -7.48626,-7.48626c0,-4.13883 3.34743,-7.48626 7.48626,-7.48626c4.1389,0 7.48633,3.34743 7.48633,7.48626c0,4.13883 -3.34743,7.48626 -7.48633,7.48626z" /></g></svg>
           <div className={style.content_header_information_text}>
             <div className={style.text_info}>
-              30 минут доставка
+              {t('30minut')}
             </div>
-            <a className={style.text_info_additionally_type} href="/">подробнее</a>
+            <a className={style.text_info_additionally_type} href="/">{t('more')}</a>
           </div>
         </div>
         <div className={style.content_header_info_telephone}>
@@ -30,23 +43,22 @@ export default function Header({ onLoginShow, currentUser }:HeaderProps) {
           <a className={style.telephone_size} href="tel:7717">7717</a>
         </div>
         <div className={style.content_header_buttons}>
-          <select name="languages" className={style.languages}>
-            <option value="RUS">Русский</option>
-            <option value="ENG">Английский</option>
+          <select name="languages" className={style.languages} value={lang} onChange={onChangeLang}>
+            <option value="ru">{t('language.ru')}</option>
+            <option value="en">{t('language.en')}</option>
           </select>
           <select name="city" className={style.city}>
-            <option value="RUS">Минск</option>
-            <option value="ENG">Гомель</option>
-            <option value="RUS">Брест</option>
-            <option value="ENG">Солигорск</option>
-            <option value="RUS">Витебск</option>
-            <option value="ENG">Барановичи</option>
-            <option value="RUS">Могилев</option>
-            <option value="ENG">Гродно</option>
-            <option value="ENG">Бобруйск</option>
+            <option value="sity1">{t('sity.Minsk')}</option>
+            <option value="sity2">{t('sity.Brest')}</option>
+            <option value="sity3">{t('sity.Soligorsk')}</option>
+            <option value="sity4">{t('sity.Vitebsk')}</option>
+            <option value="sity5">{t('sity.Baranovichi')}</option>
+            <option value="sity6">{t('sity.Mogilev')}</option>
+            <option value="sity7">{t('sity.Grogno')}</option>
+            <option value="sity8">{t('sity.Bobruisk')}</option>
           </select>
           <button type="button" className={style.button_show} onClick={onLoginShow}>
-            {currentUser.id === '' ? 'Войти' : 'Профиль' }
+            {currentUser.id === '' ? t('login') : t('profile') }
           </button>
         </div>
       </div>

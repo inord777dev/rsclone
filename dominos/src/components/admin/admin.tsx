@@ -116,6 +116,8 @@ export default function Admin() {
     }
   };
 
+  const isSA = (user:ICurrentUser) => user.email === 'sa@dominos.by';
+
   return (
     <div className={style.profile}>
       <div className={style.profile__wrap}>
@@ -196,7 +198,7 @@ export default function Admin() {
                     <td>{user.id}</td>
                     <td>{user.email}</td>
                     <td>
-                      <select value={user.settings?.role} disabled={user.email === 'sa@dominos.by'}>
+                      <select value={user.settings?.role} disabled={isSA(user)}>
                         <option value="admin">Администратор</option>
                         <option value="user">Пользователь</option>
                       </select>
@@ -204,7 +206,7 @@ export default function Admin() {
                     <td>
                       <button
                         type="button"
-                        disabled={user.email === 'sa@dominos.by'}
+                        disabled={isSA(user)}
                       >
                         Удалить
                       </button>
