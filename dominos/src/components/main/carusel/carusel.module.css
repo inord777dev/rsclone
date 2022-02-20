@@ -1,0 +1,19 @@
+.wrapper_swiper :global(.swiper-pagination) {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  padding: 0 800px;
+}
+
+.wrapper_swiper :global(.swiper-pagination-bullet) {
+  background-color: #00537a;
+  opacity: 1;
+}
+
+.wrapper_swiper :global(.swiper-pagination-bullet-active) {
+  background-color: #e31837;
+}
+/*# sourceMappingURL=carusel.module.css.map */

@@ -1,0 +1,35 @@
+.wrapper {
+  width: 100%;
+  background-image: url("../../../assets/front/img-f40c5c.jpg");
+}
+
+.container {
+  width: 1350px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin: 0 auto;
+  padding: 100px 0;
+  gap: 5rem;
+}
+
+.size_image {
+  width: 100px;
+}
+
+.text {
+  font-size: 2.5rem;
+  text-decoration: none;
+  color: black;
+}
+
+.content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 1rem;
+}
+/*# sourceMappingURL=footer.module.css.map */

@@ -62,6 +62,7 @@ export interface UserSettings {
   stage: string;
   gate: string;
   code: string;
+  role: string;
 }
 
 export type GlobalState = {

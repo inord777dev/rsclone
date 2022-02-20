@@ -25,6 +25,7 @@ export default function Profile() {
     stage: '',
     gate: '',
     code: '',
+    role: 'user',
   });
   const [orders, setOrders] = useState<IOrder[]>([]);
 
@@ -45,7 +46,6 @@ export default function Profile() {
       .then((response) => {
         if (response.status === 200) {
           setUserSettings(response?.data);
-          console.log(1111);
         }
       });
   }

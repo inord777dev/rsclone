@@ -84,6 +84,7 @@ export default function Order() {
     stage: '',
     gate: '',
     code: '',
+    role: '',
   });
 
   const token = CookieService.getToken();
