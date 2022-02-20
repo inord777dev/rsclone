@@ -1,5 +1,12 @@
+/**
+ * @jest-environment jsdom
+ */
+
 import React from 'react';
+import { Provider } from 'react-redux';
 import { screen, render } from '@testing-library/react';
+import store from '../../../../store/store';
+
 import PizzaCard from './pizzaCard';
 
 const mockPizza = {
@@ -14,11 +21,15 @@ const mockPizza = {
 };
 
 const renderPizzas = () => {
-  render(<PizzaCard pizza={mockPizza} />);
+  render(
+    <Provider store={store}>
+      <PizzaCard pizza={mockPizza} />
+    </Provider>,
+  );
 };
 
-describe('Test1', () => {
-  it('mockPizza1', () => {
+describe('PizzaCard test', () => {
+  it('mockPizza', () => {
     renderPizzas();
     expect(screen.getByText('Изи Фризи')).toBeVisible();
   });

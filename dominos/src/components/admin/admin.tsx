@@ -151,7 +151,6 @@ export default function Admin() {
             const userMap = { ...user };
             if (user.id === userSettings.userId) {
               userMap.settings.role = userSettings.role;
-              console.log(userSettings, JSON.stringify(userSettings));
             }
             return userMap;
           }));

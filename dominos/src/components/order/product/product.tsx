@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { IProduct } from '../../../common/types';
 
 import style from './product.module.scss';

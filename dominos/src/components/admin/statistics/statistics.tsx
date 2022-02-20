@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Chart } from 'react-google-charts';
 
 import style from './statistics.module.scss';

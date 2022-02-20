@@ -1,6 +1,5 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
 
 import './i18n/config';
 import './App.css';

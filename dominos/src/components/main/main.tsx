@@ -23,14 +23,8 @@ export default function Main() {
 
   const changeLanguage = (language:string) => {
     i18n.changeLanguage(language)
-      .then(() => {
-        console.log(i18n.language);
-        console.log(i18n.languages);
-        console.log(t('sity'));
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+      .then(() => {})
+      .catch(() => {});
   };
 
   const navigate = useNavigate();
