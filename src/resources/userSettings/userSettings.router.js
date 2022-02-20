@@ -5,12 +5,15 @@ const { userSettings } = require('../../utils/validation/schemas');
 const { validator } = require('../../utils/validation/validator');
 
 router.get('/', async (req, res) => {
-  const setting = await userSettingsService.get(req.userId);
+  const setting = await userSettingsService.get(req.params.orderId);
   res.status(OK).send(setting.toResponse());
 });
 
 router.put('/', validator(userSettings, 'body'), async (req, res) => {
-  const setting = await userSettingsService.upsert(req.userId, req.body);
+  const setting = await userSettingsService.upsert(
+    req.params.orderId,
+    req.body
+  );
   res.status(OK).send(setting.toResponse());
 });
 
