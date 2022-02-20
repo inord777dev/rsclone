@@ -4,6 +4,7 @@ import axios from 'axios';
 import { Outlet, useOutletContext, useNavigate } from 'react-router';
 import { Dispatch } from 'redux';
 import { useDispatch } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 
 import style from './main.module.scss';
 import Header from './header/header';
@@ -18,6 +19,14 @@ import {
 } from '../../common/types';
 
 export default function Main() {
+  const { t, i18n } = useTranslation();
+
+  const changeLanguage = (language:string) => {
+    i18n.changeLanguage(language)
+      .then(() => {})
+      .catch(() => {});
+  };
+
   const navigate = useNavigate();
   const [pizzas, setPizzas] = useState<IPizza[]>([]);
   const [loginVisible, loginVisibleSet] = useState(false);
@@ -76,7 +85,7 @@ export default function Main() {
 
   return (
     <div className={style.wrapper}>
-      <Header onLoginShow={onLoginShow} currentUser={currentUser} />
+      <Header onLoginShow={onLoginShow} currentUser={currentUser} changeLanguage={changeLanguage} />
       <Navigation />
       <Outlet context={{ pizzas, currentUser }} />
       <Infographic />

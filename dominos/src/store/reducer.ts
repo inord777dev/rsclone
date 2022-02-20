@@ -31,6 +31,7 @@ const initialState: GlobalState = {
       stage: '',
       gate: '',
       code: '',
+      role: '',
     },
     payment: Payment.Сash,
   },

@@ -12,7 +12,7 @@ type PropsSort = {
 
 export default function PizzaCatalog({ pizzas }:PropsSort) {
   const sortingTypes = new Map();
-  sortingTypes.set('none', (a:IPizza, b:IPizza): number => 0);
+  sortingTypes.set('none', (): number => 0);
   sortingTypes.set('name', (a:IPizza, b:IPizza): number => {
     if (a.name < b.name) {
       return -1;
@@ -45,7 +45,6 @@ export default function PizzaCatalog({ pizzas }:PropsSort) {
       setSortingPrice(!sortingPrice === null ? true : !sortingPrice);
       setSortingName(null);
     }
-    console.log(sortingName, sortingPrice);
   };
 
   return (

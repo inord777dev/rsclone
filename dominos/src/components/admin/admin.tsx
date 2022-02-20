@@ -6,14 +6,19 @@ import Statistics from './statistics/statistics';
 import CookieService from '../../services/CookieService';
 import DataService from '../../services/DateService';
 import OrderService from '../../services/OrderService';
-import { ICurrentUser, IOrder, OrderStatus } from '../../common/types';
+import {
+  ICurrentUser, IOrder, OrderStatus, UserSettings,
+} from '../../common/types';
+import { useOutletContex } from '../main/main';
 
 export default function Admin() {
+  const { currentUser } = useOutletContex();
   const token = CookieService.getToken();
 
   const [orders, setOrders] = useState<IOrder[]>([]);
   const [users, setUsers] = useState<ICurrentUser[]>([]);
   const [ordersVisible, setOrdersVisible] = useState(true);
+  const [isAdmin, setIaAdmin] = useState(false);
 
   useEffect(() => {
     async function getOrders() {
@@ -52,17 +57,27 @@ export default function Admin() {
       )
         .then((response) => {
           if (response.status === 200) {
-            setUsers(response?.data);
+            const data:ICurrentUser[] = response?.data;
+            const findedUser = data.find((x) => x.id === currentUser.id);
+            if (findedUser && findedUser.settings.role === 'admin') {
+              setUsers(data);
+              setIaAdmin(true);
+            }
           }
-        });
+        })
+        .catch(() => {});
     }
+
+    setIaAdmin(false);
+
     getOrders()
       .then(() => {})
-      .catch(() => {});
+      .catch(() => {
+      });
     getUsers()
       .then(() => {})
       .catch(() => {});
-  }, [token]);
+  }, [token, currentUser]);
 
   const onClickPage = (e: React.MouseEvent<HTMLButtonElement>) => {
     setOrdersVisible((e.target as HTMLElement).dataset.page === 'orders');
@@ -110,17 +125,91 @@ export default function Admin() {
       )
         .then((response) => {
           if (response.status === 200) {
-            console.log(currentOrder?.status);
             setOrders(ordersMap);
           }
         });
     }
   };
 
+  const isSA = (user:ICurrentUser) => user.email === 'sa@dominos.by';
+
+  async function userSettingsSave(userSettings:UserSettings) {
+    await axios
+      .put<UserSettings>(
+      `https://rs-clone-pizza-service.herokuapp.com/users/${userSettings.userId}/settings`,
+      JSON.stringify(userSettings),
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+      },
+    )
+      .then((response) => {
+        if (response.status === 200) {
+          setUsers(users.map((user) => {
+            const userMap = { ...user };
+            if (user.id === userSettings.userId) {
+              userMap.settings.role = userSettings.role;
+            }
+            return userMap;
+          }));
+        }
+      });
+  }
+
+  const onChangeRole = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const target = e.target as HTMLSelectElement;
+    const parent = target.closest('tr');
+    const userSettings:UserSettings = {
+      userId: parent?.dataset.settingsUserId as string,
+      name: parent?.dataset.settingsName as string,
+      tel: parent?.dataset.settingsTel as string,
+      bonusCount: parent?.dataset.settingsBonusCount as string,
+      city: parent?.dataset.settingsCity as string,
+      street: parent?.dataset.settingsStreet as string,
+      home: parent?.dataset.settingsHome as string,
+      flat: parent?.dataset.settingsFlat as string,
+      stage: parent?.dataset.settingsStage as string,
+      gate: parent?.dataset.settingsGate as string,
+      code: parent?.dataset.settingsCode as string,
+      role: target.value,
+    };
+    userSettingsSave(userSettings)
+      .then(() => {})
+      .catch(() => {});
+  };
+
+  const onUserDelete = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    const target = e.target as HTMLElement;
+    const parent = target.closest('tr');
+    const userId = parent?.dataset.userId as string;
+    await axios
+      .delete(
+        `https://rs-clone-pizza-service.herokuapp.com/users/${userId}`,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+          },
+        },
+      )
+      .then((response) => {
+        if (response.status === 204) {
+          setUsers(users.filter((userFilter) => userFilter.id !== userId));
+        }
+      });
+  };
+
   return (
     <div className={style.profile}>
       <div className={style.profile__wrap}>
-        <div className={style.main}>
+        <div className={style.main} hidden={isAdmin}>
+          <div className={style.header}>
+            <div className={style.header__title}>Нет доступа</div>
+          </div>
+        </div>
+        <div className={style.main} hidden={!isAdmin}>
           <div className={style.header}>
             <div className={style.header__title}>Администрирование</div>
             <div className={style.profile__pages}>
@@ -193,11 +282,30 @@ export default function Admin() {
               </thead>
               <tbody>
                 {users.map((user) => (
-                  <tr key={user.id}>
+                  <tr
+                    key={user.id}
+                    data-user-id={user.id}
+                    data-settings-user-id={user.settings.userId}
+                    data-settings-name={user.settings.name}
+                    data-settings-tel={user.settings.tel}
+                    data-settings-bonus-count={user.settings.bonusCount}
+                    data-settings-city={user.settings.city}
+                    data-settings-street={user.settings.street}
+                    data-settings-home={user.settings.home}
+                    data-settings-flat={user.settings.flat}
+                    data-settings-stage={user.settings.stage}
+                    data-settings-gate={user.settings.gate}
+                    data-settings-code={user.settings.code}
+                    data-settings-role={user.settings.role}
+                  >
                     <td>{user.id}</td>
                     <td>{user.email}</td>
                     <td>
-                      <select value={user.settings?.role}>
+                      <select
+                        value={user.settings.role}
+                        disabled={isSA(user)}
+                        onChange={onChangeRole}
+                      >
                         <option value="admin">Администратор</option>
                         <option value="user">Пользователь</option>
                       </select>
@@ -205,6 +313,8 @@ export default function Admin() {
                     <td>
                       <button
                         type="button"
+                        disabled={isSA(user)}
+                        onClick={onUserDelete}
                       >
                         Удалить
                       </button>
@@ -215,7 +325,7 @@ export default function Admin() {
             </table>
           </div>
         </div>
-        <div className={style.statistics}>
+        <div className={style.statistics} hidden={!isAdmin}>
           <div className={style.header}>
             <div className={style.header__title}>Статистика</div>
           </div>

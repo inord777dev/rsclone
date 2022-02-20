@@ -25,6 +25,7 @@ export default function Profile() {
     stage: '',
     gate: '',
     code: '',
+    role: 'user',
   });
   const [orders, setOrders] = useState<IOrder[]>([]);
 
@@ -45,7 +46,6 @@ export default function Profile() {
       .then((response) => {
         if (response.status === 200) {
           setUserSettings(response?.data);
-          console.log(1111);
         }
       });
   }
@@ -104,6 +104,11 @@ export default function Profile() {
     setUserSettings(settings);
   };
 
+  const onSignout = () => {
+    localStorage.removeItem('currentUser');
+    CookieService.clear();
+  };
+
   return (
     <div className={style.profile}>
       <div className={style.profile__wrap}>
@@ -111,9 +116,14 @@ export default function Profile() {
           <div className={style.header}>
             <div className={style.header__title}>Профиль</div>
             <div>
-              <a className={style.linkExit} href="/">
+              <a className={style.linkExit} href="/" onClick={onSignout}>
                 Выйти
               </a>
+            </div>
+            <div>
+              <Link to="/admin" className={style.linkExit} hidden={userSettings.role === 'user'}>
+                Администрирование
+              </Link>
             </div>
           </div>
           <div className={style.user}>

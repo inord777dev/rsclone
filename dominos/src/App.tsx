@@ -1,6 +1,7 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 
+import './i18n/config';
 import './App.css';
 import Main from './components/main/main';
 import Home from './components/main/home/home';

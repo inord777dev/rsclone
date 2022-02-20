@@ -1,0 +1,102 @@
+.history__item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 16px;
+  background: #fff;
+  position: relative;
+  -webkit-box-shadow: 0 4px 10px rgba(63, 93, 138, 0.1);
+          box-shadow: 0 4px 10px rgba(63, 93, 138, 0.1);
+  -webkit-transition: opacity .3s ease-out;
+  transition: opacity .3s ease-out;
+  border-radius: 10px;
+  margin-top: 8px;
+  gap: 1rem;
+}
+
+.history__context {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.history__header {
+  margin-top: 8px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.history__footer {
+  margin-top: 8px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.history__title {
+  font-family: Ubuntu,sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 21px;
+  color: #43525a;
+  -webkit-box-orient: horizontal;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-pack: left;
+  -ms-flex-pack: left;
+  justify-content: left;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.history__text {
+  font-family: Ubuntu,sans-serif;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 300;
+  color: #99a1a6;
+  margin-top: 6px;
+  text-overflow: ellipsis;
+  vertical-align: middle;
+}
+
+.history__price {
+  font-size: 14px;
+  line-height: 16px;
+  color: #43525a;
+  white-space: nowrap;
+  font-weight: 900;
+  vertical-align: middle;
+}
+
+.history__message {
+  color: rgba(0, 0, 0, 0.87);
+  font-size: 16px;
+  font-weight: 400;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  line-height: 1.5em;
+  text-align: center;
+}
+/*# sourceMappingURL=history.module.css.map */

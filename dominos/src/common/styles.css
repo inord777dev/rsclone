@@ -1,0 +1,29 @@
+.editItem {
+  padding-top: 16px;
+}
+
+.editItem__label {
+  font-family: Ubuntu,sans-serif;
+  font-size: 12px;
+  color: rgba(67, 82, 90, 0.54);
+}
+
+.editItem__input {
+  width: 100%;
+  -webkit-appearance: none;
+  height: 27px;
+  max-width: 100%;
+  font-family: Ubuntu,sans-serif;
+  font-size: 16px;
+  color: #43525a;
+  border: 0;
+  border-bottom: 1px solid #ebeced;
+  margin-top: 4px;
+  /* background-color: #e8f0fe; */
+}
+
+.input__disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+/*# sourceMappingURL=styles.css.map */
