@@ -120,6 +120,11 @@ export default function Profile() {
                 Выйти
               </a>
             </div>
+            <div>
+              <Link to="/admin" className={style.linkExit} hidden={userSettings.role === 'user'}>
+                Администрирование
+              </Link>
+            </div>
           </div>
           <div className={style.user}>
             <div className={style.user__title}>Личные данные</div>
