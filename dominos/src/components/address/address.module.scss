@@ -1,0 +1,15 @@
+@import '../../common/styles.scss';
+
+.address {
+  @extend %profileGroup;
+
+  &__title {
+    @extend %profileGroup__title;
+  }
+
+  &__content {
+    @extend %profileGroup__content;
+  }
+}
+
+

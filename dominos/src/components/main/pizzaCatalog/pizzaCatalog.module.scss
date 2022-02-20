@@ -1,0 +1,57 @@
+.container_catalog {
+  width: 1350px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  padding: 2rem 0;
+}
+
+.sort {
+  display: flex;
+  gap: 2rem;
+  font-size: 1.5rem;
+  align-items: center;
+}
+
+.type_sort {
+  display: flex;
+  gap: 1rem;
+  color: #00537a;
+  cursor: pointer;
+}
+
+.tittle {
+  font-size: 4rem;
+  color: #00537a;
+  font-weight: 400;
+}
+
+.pizza {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+
+.type_pizza {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  gap: 2rem;
+  font-size: 1.5rem;
+  color: #00537a;
+}
+
+.add {
+  font-size: 3rem;
+  color: rgba($color: grey, $alpha: 0.5);
+}
+
+.container_pizza {
+  width: 1350px;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 auto;
+  padding-bottom: 5rem;
+  gap: 1.5rem;
+  justify-content: center;
+}
